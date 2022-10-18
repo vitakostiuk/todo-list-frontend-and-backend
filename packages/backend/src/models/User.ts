@@ -7,9 +7,9 @@
 //  * @param avatar:string
 //  */
 // export interface IUser extends Document {
-//   email: string
-//   password: string
-//   avatar: string
+//   email: string;
+//   password: string;
+//   avatar: string;
 // }
 
 // const userSchema: Schema = new Schema({
@@ -29,8 +29,8 @@
 //     type: Date,
 //     default: Date.now
 //   }
-// })
+// });
 
-// const User: Model<IUser> = model('User', userSchema)
+// const User: Model<IUser> = model('User', userSchema);
 
-// export default User
+// export default User;
