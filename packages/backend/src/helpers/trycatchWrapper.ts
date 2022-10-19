@@ -1,10 +1,19 @@
 import { Response, Request, NextFunction } from 'express';
 import createError from './createError';
+import { ITodo } from '../types/todos.type';
 
-type GenericFunction = (req: Request, res: Response, next: NextFunction) => any;
+type GenericFunction = (
+  req: Request<{ todoId: string }, any, ITodo>,
+  res: Response,
+  next: NextFunction
+) => any;
 
 export const tryCatchWrapper = (ctrl: GenericFunction) => {
-  const func = async (req: Request, res: Response, next: NextFunction) => {
+  const func = async (
+    req: Request<{ todoId: string }, any, ITodo>,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const result = await ctrl(req, res, next);
       if (!result) {

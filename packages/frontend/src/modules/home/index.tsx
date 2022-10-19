@@ -1,5 +1,6 @@
 import React from 'react';
+import { TodoForm } from '../common/todoForm';
 
-const HomePageContainer = () => <div>Hello</div>;
+const HomePageContainer = () => <TodoForm />;
 
 export default HomePageContainer;
