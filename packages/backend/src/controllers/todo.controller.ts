@@ -1,55 +1,48 @@
-import { Response, Request } from 'express';
+import { Request } from 'express';
 import TodoService from '../services/todo.service';
-import { addSchema } from '../models/Todo';
-import createError from '../helpers/createError';
+import { ITodo } from '../types/todos.type';
+
+//   params: {
+//     todoId: string;
+//   };
+
+interface TypedRequestBody<T> extends Request {
+  body: T;
+}
+
+// interface TypedRequestParams<B> extends Request {
+//   params: B;
+// }
 
 export class TodoController {
   constructor(private todoService: TodoService) {}
 
-  async getAllTodo(_: Request, res: Response) {
+  async getAllTodo() {
     const todos = await this.todoService.findAll();
-    // res.send(todos);
-    res.json(todos);
+    return todos;
   }
 
-  async addTodo(req: Request, res: Response) {
-    const { error } = addSchema.validate(req.body);
-    if (error) {
-      throw createError(400, 'Missing required name field');
-    }
+  async addTodo(req: TypedRequestBody<ITodo>) {
     const result = await this.todoService.addTodo(req.body);
-    res.status(201).json(result);
+    return result;
   }
 
-  async getById(req: Request, res: Response) {
+  async getById(req: Request) {
     const { todoId } = req.params;
     const result = await this.todoService.getById(todoId);
-    if (!result) {
-      throw createError(404);
-    }
-    res.json(result);
+    return result;
   }
 
-  async removeById(req: Request, res: Response) {
+  async removeById(req: Request) {
     const { todoId } = req.params;
     const result = await this.todoService.removeById(todoId);
-    if (!result) {
-      throw createError(404);
-    }
-    res.json({ message: 'Contact deleted' });
+    return result;
   }
 
-  async updateById(req: Request, res: Response) {
-    const { error } = addSchema.validate(req.body);
-    if (error) {
-      throw createError(400, 'Missing required name field');
-    }
+  async updateById(req: Request) {
     const { todoId } = req.params;
     const result = await this.todoService.updateById(todoId, req.body, { new: true });
-    if (!result) {
-      throw createError(404);
-    }
-    res.json(result);
+    return result;
   }
 }
 

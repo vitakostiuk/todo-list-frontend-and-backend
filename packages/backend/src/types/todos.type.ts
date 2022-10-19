@@ -3,6 +3,7 @@
 export interface ITodo {
   title: string;
   todo: string;
+  private: boolean;
 }
 
 export interface IError {
