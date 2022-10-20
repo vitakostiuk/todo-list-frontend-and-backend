@@ -8,7 +8,7 @@ export const MainRouter = () => (
   <Router>
     <Switch>
       <Route component={HomePageContainer} path={APP_KEYS.ROUTER_KEYS.ROOT} exact />
-      <Route component={TodoItemPageContainer} path={APP_KEYS.ROUTER_KEYS.TODO} />
+      <Route component={TodoItemPageContainer} path={`${APP_KEYS.ROUTER_KEYS.ROOT}:todoId`} />
     </Switch>
   </Router>
 );

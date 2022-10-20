@@ -1,28 +1,28 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-// import { useQuery } from 'react-query';
-// import TodoService from '../../services/todo.service';
+import { useMutation } from 'react-query';
+import TodoService from '../../../services/todo.service';
+import { ITodo } from '../../types/todos.type';
 
 interface MyFormValues {
   title: string;
   description: string;
-  private: boolean;
+  toggle: boolean;
 }
 
-export const TodoForm: React.FC<{}> = () => {
-  const initialValues: MyFormValues = { title: '', description: '', private: false };
-  // const { data } = useQuery('all todos', () => TodoService.getAllTodos());
-  // console.log(data);
+interface IProps {
+  onClick: () => void;
+}
 
-  // const { data:response, isLoading,error, status } = useQuery('add todo', () => TodoService.addTodo());
-  // console.log(data);
+export const TodoForm = ({ onClick }: IProps) => {
+  const initialValues: MyFormValues = { title: '', description: '', toggle: false };
 
-  // const { data } = useQuery('get one', () => TodoService.getById());
-  // console.log(data);
-
-  // const { data } = useQuery('remove', () => TodoService.removeById());
-  // console.log(data);
+  const { data, mutate } = useMutation('add todo', (newTodo: ITodo) =>
+    TodoService.addTodo(newTodo)
+  );
+  // eslint-disable-next-line no-console
+  console.log('data', data);
 
   // const { data } = useQuery('put', () => TodoService.updateById());
   // console.log(data);
@@ -32,8 +32,19 @@ export const TodoForm: React.FC<{}> = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
-          // console.log({ values, actions });
+          const newTodo = {
+            title: values.title,
+            todo: values.description,
+            private: values.toggle
+          };
+
+          mutate(newTodo);
+          // eslint-disable-next-line no-console
+          console.log('newTodo', newTodo);
+          // eslint-disable-next-line no-console
+          console.log({ values, actions });
           actions.setSubmitting(false);
+          onClick();
         }}
       >
         <Form>
@@ -42,7 +53,7 @@ export const TodoForm: React.FC<{}> = () => {
           <label htmlFor="description">Add Description</label>
           <Field id="description" type="arialabel" name="description" placeholder="description" />
           <label htmlFor="private">Private</label>
-          <Field id="private" type="checkbox" name="checked" value="Private" />
+          <Field id="private" type="checkbox" name="toggle" />
           <button type="submit">Submit</button>
         </Form>
       </Formik>

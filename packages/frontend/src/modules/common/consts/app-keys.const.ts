@@ -26,7 +26,6 @@ export const BACKEND_KEYS = {
 
 export const ROUTER_KEYS = {
   ROOT: '/',
-  TODO: '/todo',
   HOME: 'home',
   AUTHORIZED: 'authorized'
 };

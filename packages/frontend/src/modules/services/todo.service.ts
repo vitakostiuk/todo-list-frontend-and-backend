@@ -2,6 +2,10 @@
 import { HttpSerivce } from './http.service';
 import { ITodo } from '../common/types/todos.type';
 
+interface IResponse {
+  data: ITodo[];
+}
+
 class TodoService extends HttpSerivce {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor() {
@@ -9,7 +13,7 @@ class TodoService extends HttpSerivce {
   }
 
   getAllTodos() {
-    const result: ITodo[] = this.get({ url: 'todos' });
+    const result: IResponse = this.get({ url: 'todos' });
     return result;
   }
 
