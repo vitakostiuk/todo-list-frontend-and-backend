@@ -28,7 +28,7 @@ export const TodoForm: React.FC<{}> = () => {
   // console.log(data);
   return (
     <div>
-      <h1>My Example</h1>
+      <h1>Add todo</h1>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
