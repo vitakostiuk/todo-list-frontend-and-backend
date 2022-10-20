@@ -1,5 +1,12 @@
 // TODO: Put a real interfaces here
 
 export interface ITodo {
-  data: string;
+  title: string;
+  todo: string;
+  private: boolean;
+}
+
+export interface IError {
+  status?: number;
+  message?: string;
 }
