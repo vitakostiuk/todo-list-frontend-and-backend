@@ -1,56 +1,76 @@
-import React from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
-// import { useMutation } from 'react-query';
-// import TodoService from '../../../services/todo.service';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useGetAllTodos } from '../../hooks/useGetAllTodos';
 import { useRemoveById } from '../../hooks/useRemoveById';
+import { ITodo } from '../../types/todos.type';
 
 interface ILocation {
   state: { pathname: string; search: string; hash: string; state: undefined };
 }
 
-interface IParams {
-  todoId: string;
+interface IProps {
+  filter: string;
+  filterByPrivate: boolean;
+  filterByPublic: boolean;
+  filterByCompleted: boolean;
+  filterByAll: boolean;
 }
 
-const TodoList = () => {
-  const { data, isLoading, error } = useGetAllTodos();
-  // const { data, isLoading, error } = useQuery('all todos', () => TodoService.getAllTodos());
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const TodoList = ({
+  filter,
+  filterByPrivate,
+  filterByPublic,
+  filterByCompleted,
+  filterByAll
+}: IProps) => {
+  const [todos, setTodos] = useState<ITodo[]>([]);
+  // const allTodosQuery = useGetAllTodos(filter);
+  const allTodosQuery = useGetAllTodos();
+
+  useEffect(() => {
+    if (allTodosQuery.data) {
+      setTodos(allTodosQuery.data.data);
+    }
+  }, [allTodosQuery]);
   // eslint-disable-next-line no-console
-  console.log(data?.data);
+  // console.log(allTodosQuery?.data?.data);
 
   const location: ILocation = useLocation();
 
-  const params: IParams = useParams();
+  const removeByIdMutation = useRemoveById();
 
-  const mutation = useRemoveById();
-  // eslint-disable-next-line no-console
-  console.log('delete mutation', mutation);
-  // const mutation = useMutation('remove', () => TodoService.removeById(params.todoId));
-  // console.log('mutation', mutation);
+  const normalizedFilter = filter.toLowerCase();
+  let filteredTodos = todos.filter((todo) => todo.title.toLowerCase().includes(normalizedFilter));
 
-  const deleteTodo = async () => {
-    await mutation.mutateAsync(params.todoId);
-  };
+  if (filterByPrivate === true) {
+    filteredTodos = todos.filter((todo) => todo.private === true);
+  } else if (filterByPublic === true) {
+    filteredTodos = todos.filter((todo) => todo.private === false);
+  } else if (filterByCompleted === true) {
+    filteredTodos = todos.filter((todo) => todo.completed === true);
+  } else if (filterByAll === true) {
+    filteredTodos = todos.filter((todo) => todo.title.toLowerCase().includes(normalizedFilter));
+  }
 
   return (
     <div>
-      {isLoading && <div>Loading....</div>}
-      {!isLoading && data && (
+      {allTodosQuery.isLoading && <div>Loading....</div>}
+      {!allTodosQuery.isLoading && allTodosQuery?.data && (
         <ul>
-          {data?.data.map(({ _id, title, todo }) => (
+          {filteredTodos.map(({ _id, title, todo }) => (
             <li key={_id}>
               <h3>{title}</h3>
               <p>{todo}</p>
-              <Link to={{ pathname: `/${_id}`, state: location }}>Viev</Link>
-              <button type="button" onClick={deleteTodo}>
+              <Link to={{ pathname: `/${_id}`, state: { from: location } }}>Viev</Link>
+              <button type="button" onClick={() => removeByIdMutation.mutate(_id)}>
                 Delete
               </button>
             </li>
           ))}
         </ul>
       )}
-      {error && <div>Something went wrong</div>}
+      {allTodosQuery.error && <div>Something went wrong</div>}
     </div>
   );
 };

@@ -1,23 +1,13 @@
-import React, { useState } from 'react';
-import Modal from '../modal';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const Header = () => {
-  const [isShowModal, setIsShowModal] = useState(false);
-
-  const handleClick = () => {
-    setIsShowModal((prevIsShowModal) => !prevIsShowModal);
-  };
-
-  return (
-    <nav>
-      <button type="button" onClick={handleClick}>
-        Create Todo
-      </button>
-      {isShowModal && <Modal onClick={handleClick} />}
-      <div>Todolist</div>
-      <div>My Profile</div>
-    </nav>
-  );
-};
+const Header = () => (
+  <nav>
+    <NavLink exact to="/">
+      Todolist
+    </NavLink>
+    <div>My Profile</div>
+  </nav>
+);
 
 export default Header;

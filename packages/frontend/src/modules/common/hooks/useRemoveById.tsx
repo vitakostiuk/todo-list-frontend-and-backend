@@ -7,7 +7,7 @@ export const useRemoveById = () => {
   const mutate = useMutation((id: string) => TodoService.removeById(id), {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onSettled(...params) {
-      client.invalidateQueries('all todos');
+      client.invalidateQueries('todos');
     }
   });
 

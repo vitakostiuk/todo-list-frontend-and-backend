@@ -1,9 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { useMutation } from 'react-query';
-import TodoService from '../../../services/todo.service';
-import { ITodo } from '../../types/todos.type';
+import { useAddTodo } from '../../hooks/useAddTodo';
 
 interface MyFormValues {
   title: string;
@@ -18,14 +16,8 @@ interface IProps {
 export const TodoForm = ({ onClick }: IProps) => {
   const initialValues: MyFormValues = { title: '', description: '', toggle: false };
 
-  const { data, mutate } = useMutation('add todo', (newTodo: ITodo) =>
-    TodoService.addTodo(newTodo)
-  );
-  // eslint-disable-next-line no-console
-  console.log('data', data);
+  const addTodoMutation = useAddTodo();
 
-  // const { data } = useQuery('put', () => TodoService.updateById());
-  // console.log(data);
   return (
     <div>
       <h1>Add todo</h1>
@@ -35,14 +27,13 @@ export const TodoForm = ({ onClick }: IProps) => {
           const newTodo = {
             title: values.title,
             todo: values.description,
-            private: values.toggle
+            private: values.toggle,
+            completed: false
           };
 
-          mutate(newTodo);
+          addTodoMutation.mutate(newTodo);
           // eslint-disable-next-line no-console
-          console.log('newTodo', newTodo);
-          // eslint-disable-next-line no-console
-          console.log({ values, actions });
+          // console.log({ values, actions });
           actions.setSubmitting(false);
           onClick();
         }}

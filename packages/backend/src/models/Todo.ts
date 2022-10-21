@@ -10,7 +10,8 @@ export interface ITodo extends Document {
 const addSchema: Joi.ObjectSchema<any> = Joi.object({
   todo: Joi.string().min(2).required(),
   title: Joi.string().min(2).required(),
-  private: Joi.boolean().required()
+  private: Joi.boolean().required(),
+  completed: Joi.boolean().required()
 });
 
 const todoSchema: Schema = new Schema(
@@ -26,6 +27,10 @@ const todoSchema: Schema = new Schema(
     private: {
       type: Boolean,
       required: true
+    },
+    completed: {
+      type: Boolean,
+      required: false
     }
   },
   { versionKey: false, timestamps: true }

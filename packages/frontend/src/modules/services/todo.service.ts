@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { HttpSerivce } from './http.service';
-import { ITodo } from '../common/types/todos.type';
+import { ITodo, IAddTodo } from '../common/types/todos.type';
 
 interface IResponse {
   data: ITodo[];
@@ -17,7 +17,7 @@ class TodoService extends HttpSerivce {
     return result;
   }
 
-  addTodo(todo: ITodo) {
+  addTodo(todo: IAddTodo) {
     return this.add({
       url: 'todos',
       data: todo
@@ -38,7 +38,7 @@ class TodoService extends HttpSerivce {
     });
   }
 
-  updateById(todo: ITodo, todoId: string) {
+  updateById(todo: IAddTodo, todoId: string) {
     return this.put({
       url: 'todos',
       data: todo,
