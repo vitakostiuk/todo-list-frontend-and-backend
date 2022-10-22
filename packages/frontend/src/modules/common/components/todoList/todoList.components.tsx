@@ -74,7 +74,7 @@ const TodoList = ({
   } else if (filterByAll === true) {
     filteredTodos = todos.filter((todo) => todo.title.toLowerCase().includes(normalizedFilter));
   }
-  console.log(filteredTodos);
+  // console.log(filteredTodos);
 
   return (
     <div>
@@ -139,34 +139,6 @@ const TodoList = ({
           </Slider>
         </Styled.TabletWrapper>
       )}
-
-      {/* {!allTodosQuery.isLoading && allTodosQuery?.data && (
-        <Styled.List>
-          {filteredTodos.map(({ _id, title, todo, private: isPrivate }) => (
-            <Styled.Item key={_id}>
-              <Styled.Title>{title}</Styled.Title>
-              <Styled.Describtion>{todo}</Styled.Describtion>
-              <Styled.BtnWrapper>
-                <Styled.StyleLink to={{ pathname: `/${_id}`, state: { from: location } }}>
-                  Viev
-                </Styled.StyleLink>
-                <Styled.Button type="button" onClick={() => removeByIdMutation.mutate(_id)}>
-                  Delete
-                </Styled.Button>
-                {isPrivate === true ? (
-                  <Styled.PrivateWrapper>
-                    <Styled.PrivateToggle />
-                  </Styled.PrivateWrapper>
-                ) : (
-                  <Styled.PublicWrapper>
-                    <Styled.PrivateToggle />
-                  </Styled.PublicWrapper>
-                )}
-              </Styled.BtnWrapper>
-            </Styled.Item>
-          ))}
-        </Styled.List>
-      )} */}
       {allTodosQuery.error && <div>Something went wrong</div>}
     </div>
   );
