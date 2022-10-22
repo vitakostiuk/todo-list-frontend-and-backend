@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import { useAddTodo } from '../../hooks/useAddTodo';
+import * as Styled from './todoForm.styled';
 
 interface MyFormValues {
   title: string;
@@ -19,8 +20,8 @@ export const TodoForm = ({ onClick }: IProps) => {
   const addTodoMutation = useAddTodo();
 
   return (
-    <div>
-      <h1>Add todo</h1>
+    <Styled.Container>
+      <Styled.FormTitle>Add todo</Styled.FormTitle>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
@@ -39,15 +40,31 @@ export const TodoForm = ({ onClick }: IProps) => {
         }}
       >
         <Form>
-          <label htmlFor="title">Add Title</label>
-          <Field id="title" name="title" placeholder="title" />
-          <label htmlFor="description">Add Description</label>
-          <Field id="description" type="arialabel" name="description" placeholder="description" />
-          <label htmlFor="private">Private</label>
-          <Field id="private" type="checkbox" name="toggle" />
-          <button type="submit">Submit</button>
+          <Styled.InputWrapper>
+            <Styled.Label htmlFor="title">Add Title</Styled.Label>
+            <Styled.StyleField id="title" name="title" placeholder="Title..." />
+          </Styled.InputWrapper>
+          <Styled.InputWrapper>
+            {' '}
+            <Styled.Label htmlFor="description">Add Description</Styled.Label>
+            <Styled.Textarea
+              id="description"
+              name="description"
+              placeholder="Description..."
+              // as="textarea"
+            />
+          </Styled.InputWrapper>
+          <Styled.InputCheckbox>
+            {' '}
+            <Styled.Label htmlFor="private">Private</Styled.Label>
+            <Styled.FieldCheckbox id="private" type="checkbox" name="toggle" />
+          </Styled.InputCheckbox>
+          <Styled.BtnWrap>
+            {' '}
+            <Styled.Button type="submit">Add Todo</Styled.Button>
+          </Styled.BtnWrap>
         </Form>
       </Formik>
-    </div>
+    </Styled.Container>
   );
 };

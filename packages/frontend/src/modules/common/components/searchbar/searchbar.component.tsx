@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import * as Styled from './searchbar.styled';
 
 interface IProps {
   handleChangeFilter: (text: string) => void;
@@ -40,31 +42,31 @@ const Searchbar = ({
   };
 
   return (
-    <div>
-      {/* <label htmlFor="filter">Search Todo</label> */}
-      <input
+    <Styled.Container>
+      <Styled.Label htmlFor="filter">Search Todo</Styled.Label>
+      <Styled.Input
         id="filter"
         type="text"
         value={filter}
         name="Search Todo"
         onChange={onChangeFilter}
-        placeholder="title"
+        placeholder="Search todo name..."
       />
-      <ul>
-        <button type="button" onClick={onFilterByAll}>
+      <Styled.BtnList>
+        <Styled.Button type="button" onClick={onFilterByAll}>
           All
-        </button>
-        <button type="button" onClick={onFilterByPublic}>
+        </Styled.Button>
+        <Styled.Button type="button" onClick={onFilterByPublic}>
           Public
-        </button>
-        <button type="button" onClick={onFilterByPrivate}>
+        </Styled.Button>
+        <Styled.Button type="button" onClick={onFilterByPrivate}>
           Private
-        </button>
-        <button type="button" onClick={onFilterByCompleted}>
+        </Styled.Button>
+        <Styled.Button type="button" onClick={onFilterByCompleted}>
           Completed
-        </button>
-      </ul>
-    </div>
+        </Styled.Button>
+      </Styled.BtnList>
+    </Styled.Container>
   );
 };
 

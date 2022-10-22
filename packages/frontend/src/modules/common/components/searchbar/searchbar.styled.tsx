@@ -1,20 +1,8 @@
 import styled from 'styled-components';
-import { Field } from 'formik';
 
 export const Container = styled('div')`
-  display: block;
-  width: 100%;
-`;
-
-export const FormTitle = styled('h1')`
-  text-align: center;
-  font-size: 25px;
-  font-weight: 700;
-`;
-
-export const InputWrapper = styled('div')`
-  display: flex;
-  flex-direction: column;
+  padding: 0 15px;
+  /* border: 1px solid red; */
 `;
 
 export const Label = styled('label')`
@@ -25,7 +13,7 @@ export const Label = styled('label')`
   font-weight: 700;
 `;
 
-export const StyleField = styled(Field)`
+export const Input = styled('input')`
   background-color: #fff;
   border: 1px solid var(--text-color-gray);
   color: var(--text-color-gray);
@@ -33,7 +21,8 @@ export const StyleField = styled(Field)`
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
-  width: 100%;
+  width: 160px;
+  height: 30px;
   padding: 5px 10px;
 
   &:focus,
@@ -44,38 +33,35 @@ export const StyleField = styled(Field)`
   }
 `;
 
-export const Textarea = styled(StyleField)`
-  /* resize: none; */
-  height: 100px;
-`;
-
-export const InputCheckbox = styled(InputWrapper)`
+export const BtnList = styled('ul')`
   display: flex;
-  flex-direction: row;
-`;
-
-export const FieldCheckbox = styled(Field)`
-  margin-left: 20px;
+  justify-content: center;
 `;
 
 export const Button = styled('button')`
-  border: none;
+  min-width: 30px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  background-color: #acacac;
-  color: var(--accent-color);
+  background-color: var(--accent-color);
+  color: #ffffff;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 500;
   padding: 5px 10px;
   border-radius: 3px;
   box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
+  text-decoration: none;
+  transition: transform 500ms;
+  border: none;
+  margin-top: 20px;
 
   &:hover {
-    background-color: var(--accent-color);
-    color: #fff;
+    transform: scale(1.03);
   }
-`;
 
-export const BtnWrap = styled('div')`
-  display: flex;
-  justify-content: center;
+  &:not(:last-child) {
+    border-right: 2px solid #fff;
+  }
 `;

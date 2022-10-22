@@ -1,13 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import * as Styled from './header.styled';
 
 const Header = () => (
-  <nav>
-    <NavLink exact to="/">
+  <Styled.MenuUl>
+    <Styled.StyleNavLink exact to="/">
       Todolist
-    </NavLink>
-    <div>My Profile</div>
-  </nav>
+    </Styled.StyleNavLink>
+    <Styled.StyleNavLink exact to="/">
+      My Profile
+    </Styled.StyleNavLink>
+  </Styled.MenuUl>
 );
 
 export default Header;

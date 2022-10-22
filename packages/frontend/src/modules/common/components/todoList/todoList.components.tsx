@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useGetAllTodos } from '../../hooks/useGetAllTodos';
 import { useRemoveById } from '../../hooks/useRemoveById';
 import { ITodo } from '../../types/todos.type';
+import * as Styled from './todoList.styled';
 
 interface ILocation {
   state: { pathname: string; search: string; hash: string; state: undefined };
@@ -34,7 +35,6 @@ const TodoList = ({
     }
   }, [allTodosQuery]);
   // eslint-disable-next-line no-console
-  // console.log(allTodosQuery?.data?.data);
 
   const location: ILocation = useLocation();
 
@@ -52,23 +52,37 @@ const TodoList = ({
   } else if (filterByAll === true) {
     filteredTodos = todos.filter((todo) => todo.title.toLowerCase().includes(normalizedFilter));
   }
+  console.log(filteredTodos);
 
   return (
     <div>
       {allTodosQuery.isLoading && <div>Loading....</div>}
       {!allTodosQuery.isLoading && allTodosQuery?.data && (
-        <ul>
-          {filteredTodos.map(({ _id, title, todo }) => (
-            <li key={_id}>
-              <h3>{title}</h3>
-              <p>{todo}</p>
-              <Link to={{ pathname: `/${_id}`, state: { from: location } }}>Viev</Link>
-              <button type="button" onClick={() => removeByIdMutation.mutate(_id)}>
-                Delete
-              </button>
-            </li>
+        <Styled.List>
+          {filteredTodos.map(({ _id, title, todo, private: isPrivate }) => (
+            <Styled.Item key={_id}>
+              <Styled.Title>{title}</Styled.Title>
+              <Styled.Describtion>{todo}</Styled.Describtion>
+              <Styled.BtnWrapper>
+                <Styled.StyleLink to={{ pathname: `/${_id}`, state: { from: location } }}>
+                  Viev
+                </Styled.StyleLink>
+                <Styled.Button type="button" onClick={() => removeByIdMutation.mutate(_id)}>
+                  Delete
+                </Styled.Button>
+                {isPrivate === true ? (
+                  <Styled.PrivateWrapper>
+                    <Styled.PrivateToggle />
+                  </Styled.PrivateWrapper>
+                ) : (
+                  <Styled.PublicWrapper>
+                    <Styled.PrivateToggle />
+                  </Styled.PublicWrapper>
+                )}
+              </Styled.BtnWrapper>
+            </Styled.Item>
           ))}
-        </ul>
+        </Styled.List>
       )}
       {allTodosQuery.error && <div>Something went wrong</div>}
     </div>

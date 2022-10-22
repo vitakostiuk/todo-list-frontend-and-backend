@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Searchbar from '../searchbar';
 import TodoList from '../todoList';
 import Modal from '../modal';
+import * as Styled from './todoContainer.styled';
 
 const TodoContainer = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -50,9 +51,9 @@ const TodoContainer = () => {
 
   return (
     <div>
-      <button type="button" onClick={handleClickModal}>
+      <Styled.Button type="button" onClick={handleClickModal}>
         Create Todo
-      </button>
+      </Styled.Button>
       {isShowModal && <Modal onClick={handleClickModal} />}
       <Searchbar
         handleChangeFilter={handleChangeFilter}
