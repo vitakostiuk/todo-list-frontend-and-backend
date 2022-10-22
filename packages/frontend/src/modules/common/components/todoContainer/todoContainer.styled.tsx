@@ -19,4 +19,10 @@ export const Button = styled('button')`
   &:hover {
     transform: scale(1.03);
   }
+
+  @media screen and (min-width: 768px) {
+    width: 110px;
+    height: 110px;
+    font-size: 23px;
+  }
 `;

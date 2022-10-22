@@ -43,15 +43,17 @@ const Searchbar = ({
 
   return (
     <Styled.Container>
-      <Styled.Label htmlFor="filter">Search Todo</Styled.Label>
-      <Styled.Input
-        id="filter"
-        type="text"
-        value={filter}
-        name="Search Todo"
-        onChange={onChangeFilter}
-        placeholder="Search todo name..."
-      />
+      <Styled.InputWrapper>
+        <Styled.Label htmlFor="filter">Search Todo</Styled.Label>
+        <Styled.Input
+          id="filter"
+          type="text"
+          value={filter}
+          name="Search Todo"
+          onChange={onChangeFilter}
+          placeholder="Search todo name..."
+        />
+      </Styled.InputWrapper>
       <Styled.BtnList>
         <Styled.Button type="button" onClick={onFilterByAll}>
           All

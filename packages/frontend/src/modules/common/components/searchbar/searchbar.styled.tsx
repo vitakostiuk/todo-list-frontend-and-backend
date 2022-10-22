@@ -3,6 +3,23 @@ import styled from 'styled-components';
 export const Container = styled('div')`
   padding: 0 15px;
   /* border: 1px solid red; */
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0;
+  }
+`;
+
+export const InputWrapper = styled('div')`
+  /* border: 1px solid red; */
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const Label = styled('label')`
@@ -36,11 +53,15 @@ export const Input = styled('input')`
 export const BtnList = styled('ul')`
   display: flex;
   justify-content: center;
+
+  @media screen and (min-width: 768px) {
+    /* border: 1px solid red; */
+  }
 `;
 
 export const Button = styled('button')`
   min-width: 30px;
-  height: 25px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -50,7 +50,7 @@ const TodoContainer = () => {
   };
 
   return (
-    <div>
+    <>
       <Styled.Button type="button" onClick={handleClickModal}>
         Create Todo
       </Styled.Button>
@@ -69,7 +69,7 @@ const TodoContainer = () => {
         filterByCompleted={filterByCompleted}
         filterByAll={filterByAll}
       />
-    </div>
+    </>
   );
 };
 export default TodoContainer;
