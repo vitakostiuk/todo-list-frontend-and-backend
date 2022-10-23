@@ -36,6 +36,12 @@ export class TodoController {
     const result = await this.todoService.updateById(todoId, req.body, { new: true });
     return result;
   }
+
+  async updateStatus(req: Request<{ todoId: string }, any, ITodo>) {
+    const { todoId } = req.params;
+    const result = await this.todoService.updateStatus(todoId, req.body, { new: true });
+    return result;
+  }
 }
 
 const todoController = new TodoController(new TodoService());

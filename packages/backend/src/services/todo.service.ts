@@ -26,4 +26,9 @@ export default class TodoService {
     const result = await Todo.findByIdAndUpdate(id, body, obj);
     return result;
   }
+
+  async updateStatus(id: string, body: ITodo, obj: { new: boolean }) {
+    const result = await Todo.findByIdAndUpdate(id, body, obj);
+    return result;
+  }
 }

@@ -14,3 +14,11 @@ export interface IAddTodo {
   private: boolean;
   completed: boolean;
 }
+
+export interface IStatusPrivate {
+  private: boolean;
+}
+
+export interface IStatusCompleted {
+  completed: boolean;
+}

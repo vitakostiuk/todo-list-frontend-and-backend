@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
-import { IAddTodo } from '../common/types/todos.type';
+import { IAddTodo, IStatusPrivate, IStatusCompleted } from '../common/types/todos.type';
 
 export class HttpSerivce {
   baseUrl: string | undefined;
@@ -37,5 +37,19 @@ export class HttpSerivce {
 
   put(config: { url: string; data: IAddTodo; id: string }) {
     return this.fetchingService.put(this.getFullApiUrl(`${config.url}/${config.id}`), config.data);
+  }
+
+  updatePrivateField(config: { url: string; data: IStatusPrivate; id: string }) {
+    return this.fetchingService.patch(
+      this.getFullApiUrl(`${config.url}/${config.id}/status`),
+      config.data
+    );
+  }
+
+  updateCompletedField(config: { url: string; data: IStatusCompleted; id: string }) {
+    return this.fetchingService.patch(
+      this.getFullApiUrl(`${config.url}/${config.id}/status`),
+      config.data
+    );
   }
 }

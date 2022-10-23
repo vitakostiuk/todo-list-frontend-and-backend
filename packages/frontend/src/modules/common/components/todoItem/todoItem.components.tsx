@@ -3,8 +3,11 @@ import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { useGetById } from '../../hooks/useGetById';
 import { useUpdateById } from '../../hooks/useUpdateById';
+import { useUpdatePrivate } from '../../hooks/useUpdatePrivate';
+import { useUpdateCompleted } from '../../hooks/useUpdateCompleted';
 import * as Styled from './todoItem.styled';
 import * as FormStyled from '../todoForm/todoForm.styled';
+import { IStatusPrivate, IStatusCompleted } from '../../types/todos.type';
 
 interface IParams {
   todoId: string;
@@ -37,6 +40,12 @@ const TodoItem = () => {
 
   const updateByIdMutation = useUpdateById();
 
+  const updatePrivateMutation = useUpdatePrivate();
+  // console.log('updatePrivateMutation', updatePrivateMutation);
+
+  const updateCompletedMutation = useUpdateCompleted();
+  // console.log('updateCompletedMutation', updateCompletedMutation);
+
   const initialValues: MyFormValues = {
     title: data?.data.title,
     description: data?.data.todo,
@@ -52,6 +61,28 @@ const TodoItem = () => {
     setIsOpenEditForm((prevIsOpenEditForm) => !prevIsOpenEditForm);
   };
 
+  const onClickPrivateToggle = (id: string, privateStatus: IStatusPrivate) => {
+    const updatedPrivateStatus = {
+      data: {
+        private: privateStatus.private
+      },
+      id
+    };
+
+    updatePrivateMutation.mutate(updatedPrivateStatus);
+  };
+
+  const onClickCompletedToggle = (id: string, completedStatus: IStatusCompleted) => {
+    const updatedCompletedStatus = {
+      data: {
+        completed: completedStatus.completed
+      },
+      id
+    };
+
+    updateCompletedMutation.mutate(updatedCompletedStatus);
+  };
+
   return (
     <div>
       {data && (
@@ -65,11 +96,15 @@ const TodoItem = () => {
       <Styled.StateWrapper>
         <Styled.Title>Private:</Styled.Title>
         {data && data?.data.private === true ? (
-          <Styled.TrueWrapper>
+          <Styled.TrueWrapper
+            onClick={() => onClickPrivateToggle(data?.data._id, { private: false })}
+          >
             <Styled.Toggle />
           </Styled.TrueWrapper>
         ) : (
-          <Styled.FalseWrapper>
+          <Styled.FalseWrapper
+            onClick={() => onClickPrivateToggle(data?.data._id, { private: true })}
+          >
             <Styled.Toggle />
           </Styled.FalseWrapper>
         )}
@@ -78,11 +113,15 @@ const TodoItem = () => {
       <Styled.StateWrapper>
         <Styled.Title>Completed:</Styled.Title>
         {data && data?.data.completed === true ? (
-          <Styled.TrueWrapper>
+          <Styled.TrueWrapper
+            onClick={() => onClickCompletedToggle(data?.data._id, { completed: false })}
+          >
             <Styled.Toggle />
           </Styled.TrueWrapper>
         ) : (
-          <Styled.FalseWrapper>
+          <Styled.FalseWrapper
+            onClick={() => onClickCompletedToggle(data?.data._id, { completed: true })}
+          >
             <Styled.Toggle />
           </Styled.FalseWrapper>
         )}

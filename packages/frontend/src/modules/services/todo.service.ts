@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { HttpSerivce } from './http.service';
-import { ITodo, IAddTodo } from '../common/types/todos.type';
+import { ITodo, IAddTodo, IStatusPrivate, IStatusCompleted } from '../common/types/todos.type';
 
 interface IResponse {
   data: ITodo[];
@@ -42,6 +42,22 @@ class TodoService extends HttpSerivce {
     return this.put({
       url: 'todos',
       data: todo,
+      id: todoId
+    });
+  }
+
+  updatePrivate(privateStatus: IStatusPrivate, todoId: string) {
+    return this.updatePrivateField({
+      url: 'todos',
+      data: privateStatus,
+      id: todoId
+    });
+  }
+
+  updateCompleted(completedStatus: IStatusCompleted, todoId: string) {
+    return this.updateCompletedField({
+      url: 'todos',
+      data: completedStatus,
       id: todoId
     });
   }

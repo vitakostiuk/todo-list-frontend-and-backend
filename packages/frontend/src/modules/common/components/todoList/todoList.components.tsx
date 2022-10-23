@@ -3,7 +3,8 @@ import Slider from 'react-slick';
 import { useLocation } from 'react-router-dom';
 import { useGetAllTodos } from '../../hooks/useGetAllTodos';
 import { useRemoveById } from '../../hooks/useRemoveById';
-import { ITodo } from '../../types/todos.type';
+import { useUpdatePrivate } from '../../hooks/useUpdatePrivate';
+import { ITodo, IStatusPrivate } from '../../types/todos.type';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import * as Styled from './todoList.styled';
@@ -62,6 +63,9 @@ const TodoList = ({
 
   const removeByIdMutation = useRemoveById();
 
+  const updatePrivateMutation = useUpdatePrivate();
+  // console.log('updatePrivateMutation', updatePrivateMutation);
+
   const normalizedFilter = filter.toLowerCase();
   let filteredTodos = todos.filter((todo) => todo.title.toLowerCase().includes(normalizedFilter));
 
@@ -76,11 +80,20 @@ const TodoList = ({
   }
   // console.log(filteredTodos);
 
+  const onClickPrivateToggle = (id: string, privateStatus: IStatusPrivate) => {
+    const updatedPrivateStatus = {
+      data: {
+        private: privateStatus.private
+      },
+      id
+    };
+
+    updatePrivateMutation.mutate(updatedPrivateStatus);
+  };
   return (
     <div>
       {allTodosQuery.isLoading && <div>Loading....</div>}
-      {/* Mobile List */}
-      {/* Desktop List */}
+      {/* Mobile List and Desktop List */}
       {!allTodosQuery.isLoading && allTodosQuery?.data && (
         <Styled.List>
           {filteredTodos.map(({ _id, title, todo, private: isPrivate }) => (
@@ -95,11 +108,15 @@ const TodoList = ({
                   Delete
                 </Styled.Button>
                 {isPrivate === true ? (
-                  <Styled.PrivateWrapper>
+                  <Styled.PrivateWrapper
+                    onClick={() => onClickPrivateToggle(_id, { private: false })}
+                  >
                     <Styled.PrivateToggle />
                   </Styled.PrivateWrapper>
                 ) : (
-                  <Styled.PublicWrapper>
+                  <Styled.PublicWrapper
+                    onClick={() => onClickPrivateToggle(_id, { private: true })}
+                  >
                     <Styled.PrivateToggle />
                   </Styled.PublicWrapper>
                 )}
@@ -125,11 +142,15 @@ const TodoList = ({
                     Delete
                   </Styled.Button>
                   {isPrivate === true ? (
-                    <Styled.PrivateWrapper>
+                    <Styled.PrivateWrapper
+                      onClick={() => onClickPrivateToggle(_id, { private: false })}
+                    >
                       <Styled.PrivateToggle />
                     </Styled.PrivateWrapper>
                   ) : (
-                    <Styled.PublicWrapper>
+                    <Styled.PublicWrapper
+                      onClick={() => onClickPrivateToggle(_id, { private: true })}
+                    >
                       <Styled.PrivateToggle />
                     </Styled.PublicWrapper>
                   )}
