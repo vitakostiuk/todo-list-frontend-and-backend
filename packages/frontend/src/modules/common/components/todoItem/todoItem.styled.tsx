@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { Field } from 'formik';
+import { APP_KEYS } from '../../consts';
 
 export const TodoTitle = styled('h2')`
   font-size: 25px;
   font-weight: 700;
-  color: var(--text-color-black);
+  color: ${APP_KEYS.COLORS_KEYS.BLACK};
   margin-bottom: 30px;
   margin-top: 20px;
 `;
@@ -12,7 +13,7 @@ export const TodoTitle = styled('h2')`
 export const Title = styled('h3')`
   font-size: 15px;
   font-weight: 500;
-  color: var(--text-color-black);
+  color: ${APP_KEYS.COLORS_KEYS.BLACK};
 `;
 
 export const Describtion = styled('p')`
@@ -20,7 +21,7 @@ export const Describtion = styled('p')`
   word-wrap: break-word;
   font-size: 15px;
   font-weight: 700;
-  color: var(--text-color-black);
+  color: ${APP_KEYS.COLORS_KEYS.BLACK};
   margin-top: 10px;
   margin-bottom: 30px;
 `;
@@ -45,7 +46,7 @@ export const TrueWrapper = styled('div')`
 export const Toggle = styled('div')`
   width: 25px;
   height: 25px;
-  background-color: #fff;
+  background-color: ${APP_KEYS.COLORS_KEYS.WHITE};
   border-radius: 50%;
 `;
 
@@ -66,7 +67,7 @@ export const BtnEdit = styled('button')`
   align-items: center;
   cursor: pointer;
   background-color: #a3a2a2;
-  color: #ffffff;
+  color: ${APP_KEYS.COLORS_KEYS.WHITE};
   font-size: 15px;
   font-weight: 500;
   padding: 5px 10px;
@@ -84,7 +85,7 @@ export const BtnEdit = styled('button')`
 
 export const BtnBack = styled(BtnEdit)`
   width: 100px;
-  background-color: var(--accent-color);
+  background-color: ${APP_KEYS.COLORS_KEYS.ACCENT};
 `;
 
 export const EditWrapper = styled('div')`
@@ -96,7 +97,7 @@ export const FormContainer = styled('div')`
   top: 30px;
   left: 0;
 
-  background-color: #ffffff;
+  background-color: ${APP_KEYS.COLORS_KEYS.WHITE};
   box-shadow: 10px 10px 30px rgba(82, 85, 95, 0.4);
   border-radius: 30px;
   padding: 20px;

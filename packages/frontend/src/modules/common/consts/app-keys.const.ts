@@ -11,7 +11,8 @@ export const QUERY_KEYS = {
   EXAMPLE: 'EXAMPLE',
   TOKEN: 'TOKEN',
   STATISTIC: 'statistic',
-  TRENDING: 'trending'
+  TRENDING: 'trending',
+  TODOS: 'todos'
 };
 
 // Backend Routes
@@ -28,4 +29,11 @@ export const ROUTER_KEYS = {
   ROOT: '/',
   HOME: 'home',
   AUTHORIZED: 'authorized'
+};
+
+export const COLORS_KEYS = {
+  ACCENT: '#ff751d',
+  BLACK: '#2a2a2a',
+  GRAY: '#4b4c52',
+  WHITE: '#ffffff'
 };

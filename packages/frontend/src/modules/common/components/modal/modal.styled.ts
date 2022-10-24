@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { APP_KEYS } from '../../consts';
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -23,7 +24,7 @@ export const Modal = styled.div`
   width: 380px;
   height: 340px;
 
-  background-color: #ffffff;
+  background-color: ${APP_KEYS.COLORS_KEYS.WHITE};
   box-shadow: 10px 10px 30px rgba(82, 85, 95, 0.4);
   border-radius: 30px;
   padding: 20px;

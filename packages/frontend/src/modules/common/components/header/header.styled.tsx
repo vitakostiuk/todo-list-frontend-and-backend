@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { APP_KEYS } from '../../consts';
 
 export const MenuUl = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: ${APP_KEYS.COLORS_KEYS.WHITE};
   width: 100%;
   margin: 0 auto;
   margin-top: 20px;
@@ -24,14 +25,15 @@ export const MenuUl = styled.nav`
 `;
 
 export const StyleNavLink = styled(NavLink)`
+  justify-self: start;
   width: 100px;
   height: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: var(--accent-color);
-  color: #ffffff;
+  background-color: ${APP_KEYS.COLORS_KEYS.ACCENT};
+  color: ${APP_KEYS.COLORS_KEYS.WHITE};
   font-size: 15px;
   font-weight: 500;
   padding: 5px 10px;
@@ -41,10 +43,14 @@ export const StyleNavLink = styled(NavLink)`
   transition: transform 500ms;
 
   &:visited {
-    color: #ffffff;
+    color: ${APP_KEYS.COLORS_KEYS.WHITE};
   }
 
   &:hover {
     transform: scale(1.03);
+  }
+
+  &:last-child {
+    justify-self: end;
   }
 `;

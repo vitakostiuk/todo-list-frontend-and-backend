@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { APP_KEYS } from '../../consts';
 
 /* Mobile List */
 export const List = styled('ul')`
@@ -45,7 +46,7 @@ export const Item = styled('li')`
 export const Title = styled('h2')`
   font-size: 15px;
   font-weight: 700;
-  color: var(--text-color-black);
+  color: ${APP_KEYS.COLORS_KEYS.BLACK};
   margin-bottom: 5px;
   margin-top: 20px;
 
@@ -62,7 +63,7 @@ export const Title = styled('h2')`
 export const Describtion = styled('p')`
   font-size: 15px;
   font-weight: 500;
-  color: var(--text-color-black);
+  color: ${APP_KEYS.COLORS_KEYS.BLACK};
   margin-bottom: 5px;
   word-wrap: break-word;
 
@@ -98,7 +99,7 @@ export const Button = styled('button')`
   align-items: center;
   cursor: pointer;
   background-color: #a3a2a2;
-  color: #ffffff;
+  color: ${APP_KEYS.COLORS_KEYS.WHITE};
   font-size: 15px;
   font-weight: 500;
   padding: 5px 10px;
@@ -129,7 +130,7 @@ export const StyleLink = styled(Link)`
   align-items: center;
   cursor: pointer;
   background-color: #a3a2a2;
-  color: #ffffff;
+  color: ${APP_KEYS.COLORS_KEYS.WHITE};
   font-size: 15px;
   font-weight: 500;
   padding: 5px 10px;
@@ -174,7 +175,7 @@ export const PublicWrapper = styled(PrivateWrapper)`
 export const PrivateToggle = styled('div')`
   width: 25px;
   height: 25px;
-  background-color: #fff;
+  background-color: ${APP_KEYS.COLORS_KEYS.WHITE};
   border-radius: 50%;
 `;
 

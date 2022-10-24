@@ -2,6 +2,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { useAddTodo } from '../../hooks/useAddTodo';
+import Input from '../input';
 import * as Styled from './todoForm.styled';
 
 interface MyFormValues {
@@ -40,20 +41,9 @@ export const TodoForm = ({ onClick }: IProps) => {
         }}
       >
         <Form>
-          <Styled.InputWrapper>
-            <Styled.Label htmlFor="title">Add Title</Styled.Label>
-            <Styled.StyleField id="title" name="title" placeholder="Title..." />
-          </Styled.InputWrapper>
-          <Styled.InputWrapper>
-            {' '}
-            <Styled.Label htmlFor="description">Add Description</Styled.Label>
-            <Styled.Textarea
-              id="description"
-              name="description"
-              placeholder="Description..."
-              // as="textarea"
-            />
-          </Styled.InputWrapper>
+          <Input label="Add title" name="title" />
+          <Input label="Add Description" name="description" />
+
           <Styled.InputCheckbox>
             {' '}
             <Styled.Label htmlFor="private">Private</Styled.Label>

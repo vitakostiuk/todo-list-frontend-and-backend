@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { APP_KEYS } from '../../consts';
 
 export const Button = styled('button')`
   display: block;
@@ -7,7 +8,7 @@ export const Button = styled('button')`
   width: 90px;
   height: 90px;
   background-color: #a3a2a2;
-  color: #fff;
+  color: ${APP_KEYS.COLORS_KEYS.WHITE};
   font-size: 20px;
   font-weight: 500;
   border-radius: 50%;

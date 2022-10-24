@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { APP_KEYS } from '../../consts';
 
 export const Container = styled('div')`
   padding: 0 15px;
@@ -31,9 +32,9 @@ export const Label = styled('label')`
 `;
 
 export const Input = styled('input')`
-  background-color: #fff;
-  border: 1px solid var(--text-color-gray);
-  color: var(--text-color-gray);
+  background-color: ${APP_KEYS.COLORS_KEYS.WHITE};
+  border: 1px solid ${APP_KEYS.COLORS_KEYS.GRAY};
+  color: ${APP_KEYS.COLORS_KEYS.GRAY};
   border-radius: 4px;
   font-size: 15px;
   font-style: normal;
@@ -45,7 +46,7 @@ export const Input = styled('input')`
   &:focus,
   &:active {
     box-shadow: rgb(210, 213, 217) 0px 0px 2px 1px, rgb(227, 230, 232) 0px 0px 0px 3px;
-    border: 1px solid var(--accent-color);
+    border: 1px solid ${APP_KEYS.COLORS_KEYS.ACCENT};
     outline: none;
   }
 `;
@@ -66,8 +67,8 @@ export const Button = styled('button')`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: var(--accent-color);
-  color: #ffffff;
+  background-color: ${APP_KEYS.COLORS_KEYS.ACCENT};
+  color: ${APP_KEYS.COLORS_KEYS.WHITE};
   font-size: 15px;
   font-weight: 500;
   padding: 5px 10px;
@@ -83,6 +84,6 @@ export const Button = styled('button')`
   }
 
   &:not(:last-child) {
-    border-right: 2px solid #fff;
+    border-right: 2px solid ${APP_KEYS.COLORS_KEYS.WHITE};
   }
 `;

@@ -8,6 +8,7 @@ import { useUpdateCompleted } from '../../hooks/useUpdateCompleted';
 import * as Styled from './todoItem.styled';
 import * as FormStyled from '../todoForm/todoForm.styled';
 import { IStatusPrivate, IStatusCompleted } from '../../types/todos.type';
+import Input from '../input';
 
 interface IParams {
   todoId: string;
@@ -156,21 +157,8 @@ const TodoItem = () => {
               }}
             >
               <Form>
-                <FormStyled.InputWrapper>
-                  <FormStyled.Label htmlFor="title">Add Title</FormStyled.Label>
-                  <FormStyled.StyleField id="title" name="title" placeholder="Title..." />
-                </FormStyled.InputWrapper>
-
-                <FormStyled.InputWrapper>
-                  {' '}
-                  <FormStyled.Label htmlFor="description">Add Description</FormStyled.Label>
-                  <FormStyled.Textarea
-                    id="description"
-                    name="description"
-                    placeholder="Description..."
-                    // as="textarea"
-                  />
-                </FormStyled.InputWrapper>
+                <Input label="Add title" name="title" />
+                <Input label="Add Description" name="description" />
 
                 <FormStyled.InputCheckbox>
                   {' '}
