@@ -9,13 +9,16 @@ interface TypedRequestBody<T> extends Request {
 export class TodoController {
   constructor(private todoService: TodoService) {}
 
-  async getAllTodo() {
-    const todos = await this.todoService.findAll();
+  async getAllTodo(req: TypedRequestBody<ITodo>) {
+    const { id: owner } = req.user;
+    const todos = await this.todoService.findAll(owner);
     return todos;
   }
 
   async addTodo(req: TypedRequestBody<ITodo>) {
-    const result = await this.todoService.addTodo(req.body);
+    const { id: owner } = req.user;
+
+    const result = await this.todoService.addTodo({ ...req.body, owner });
     return result;
   }
 
@@ -34,6 +37,12 @@ export class TodoController {
   async updateById(req: Request<{ todoId: string }, any, ITodo>) {
     const { todoId } = req.params;
     const result = await this.todoService.updateById(todoId, req.body, { new: true });
+    return result;
+  }
+
+  async updateStatus(req: Request<{ todoId: string }, any, ITodo>) {
+    const { todoId } = req.params;
+    const result = await this.todoService.updateStatus(todoId, req.body, { new: true });
     return result;
   }
 }

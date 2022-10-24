@@ -2,8 +2,8 @@ import { Todo } from '../models/Todo';
 import { ITodo } from '../types/todos.type';
 
 export default class TodoService {
-  async findAll() {
-    const result = await Todo.find();
+  async findAll(owner: string | undefined) {
+    const result = await Todo.find({ owner }).populate('owner', 'email');
     return result;
   }
 
@@ -23,6 +23,11 @@ export default class TodoService {
   }
 
   async updateById(id: string, body: ITodo, obj: { new: boolean }) {
+    const result = await Todo.findByIdAndUpdate(id, body, obj);
+    return result;
+  }
+
+  async updateStatus(id: string, body: ITodo, obj: { new: boolean }) {
     const result = await Todo.findByIdAndUpdate(id, body, obj);
     return result;
   }

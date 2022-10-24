@@ -1,12 +1,44 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 
-const router: Router = Router();
+import userController from '../../controllers/user.controller';
+import { tryCatchWrapperUser } from '../../helpers/trycatchWrapperUser';
+import { validateUser } from '../../middlewares/validateUser';
+import { isExistNewUser } from '../../middlewares/isExistNewUser';
+import { isExistUser } from '../../middlewares/isExistUser';
+import { login } from '../../middlewares/login';
+
+const userRouter: Router = Router();
 
 // @route   POST api/user
 // @desc    Register user given their email and password, returns the token upon successful registration
 // @access  Public
-router.post('/register', async (_: Request, res: Response) => {
-  res.send('Add registration logic there');
-});
+userRouter.post(
+  '/register',
+  validateUser,
+  isExistNewUser,
+  tryCatchWrapperUser(userController.register.bind(userController))
+);
 
-export default router;
+userRouter.post(
+  '/login',
+  validateUser,
+  isExistUser,
+  tryCatchWrapperUser(userController.login.bind(userController))
+);
+
+userRouter.post(
+  '/change-password',
+  validateUser,
+  isExistUser,
+  tryCatchWrapperUser(userController.changePassword.bind(userController))
+);
+
+userRouter.get(
+  '/current',
+  login,
+  tryCatchWrapperUser(userController.getCurrent.bind(userController))
+);
+
+userRouter.get('/logout', login, tryCatchWrapperUser(userController.logout.bind(userController)));
+
+export default userRouter;
