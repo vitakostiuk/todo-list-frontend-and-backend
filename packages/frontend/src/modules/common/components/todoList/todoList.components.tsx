@@ -5,8 +5,8 @@ import { useGetAllTodos } from '../../hooks/useGetAllTodos';
 import { useRemoveById } from '../../hooks/useRemoveById';
 import { useUpdatePrivate } from '../../hooks/useUpdatePrivate';
 import { IStatusPrivate } from '../../types/todos.type';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
 import * as Styled from './todoList.styled';
 
 interface ILocation {
