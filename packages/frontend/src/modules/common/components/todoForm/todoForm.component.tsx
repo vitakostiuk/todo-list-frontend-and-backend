@@ -34,8 +34,6 @@ export const TodoForm = ({ onClick }: IProps) => {
           };
 
           addTodoMutation.mutate(newTodo);
-          // eslint-disable-next-line no-console
-          // console.log({ values, actions });
           actions.setSubmitting(false);
           onClick();
         }}
