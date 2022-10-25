@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { APP_KEYS } from '../../consts';
+import { FONTS } from '../../../theme';
+import { SPACES } from '../../../theme/spaces.const';
+import { COLORS } from '../../../theme/colors.const';
 
 /* Mobile List */
 export const List = styled('ul')`
@@ -23,7 +25,7 @@ export const Item = styled('li')`
   @media screen and (min-width: 769px) {
     min-height: 40px;
     /* height: 300px; */
-    padding: 10px;
+    padding: ${SPACES.xs};
     border: 2px solid #a3a2a2;
     border-radius: 5px;
 
@@ -38,20 +40,20 @@ export const Item = styled('li')`
     min-height: 40px;
 
     &:first-child {
-      margin-top: 20px;
+      margin-top: ${SPACES.m};
     }
   }
 `;
 
 export const Title = styled('h2')`
-  font-size: 15px;
-  font-weight: 700;
-  color: ${APP_KEYS.COLORS_KEYS.BLACK};
-  margin-bottom: 5px;
-  margin-top: 20px;
+  font-size: ${FONTS.FONT_SIZES.m};
+  font-weight: ${FONTS.WEIGHTS.bold};
+  color: ${COLORS.BLACK};
+  margin-bottom: ${SPACES.xxs};
+  margin-top: ${SPACES.m};
 
   @media screen and (min-width: 769px) {
-    margin-bottom: 10px;
+    margin-bottom: ${SPACES.xs};
   }
 
   @media screen and (min-width: 1280px) {
@@ -61,19 +63,19 @@ export const Title = styled('h2')`
 `;
 
 export const Describtion = styled('p')`
-  font-size: 15px;
-  font-weight: 500;
-  color: ${APP_KEYS.COLORS_KEYS.BLACK};
-  margin-bottom: 5px;
+  font-size: ${FONTS.FONT_SIZES.m};
+  font-weight: ${FONTS.WEIGHTS.normal};
+  color: ${COLORS.BLACK};
+  margin-bottom: ${SPACES.xxs};
   word-wrap: break-word;
 
   @media screen and (min-width: 769px) {
-    margin-bottom: 10px;
+    margin-bottom: ${SPACES.xs};
   }
 
   @media screen and (min-width: 1280px) {
     margin-bottom: 0;
-    padding-left: 10px;
+    padding-left: ${SPACES.xs};
     width: 500px;
     border-right: 2px solid #a3a2a2;
     border-left: 2px solid #a3a2a2;
@@ -87,7 +89,7 @@ export const BtnWrapper = styled('div')`
   @media screen and (min-width: 1280px) {
     margin: 0;
     width: 300px;
-    margin-left: 20px;
+    margin-left: ${SPACES.m};
   }
 `;
 
@@ -99,10 +101,10 @@ export const Button = styled('button')`
   align-items: center;
   cursor: pointer;
   background-color: #a3a2a2;
-  color: ${APP_KEYS.COLORS_KEYS.WHITE};
-  font-size: 15px;
-  font-weight: 500;
-  padding: 5px 10px;
+  color: ${COLORS.WHITE};
+  font-size: ${FONTS.FONT_SIZES.m};
+  font-weight: ${FONTS.WEIGHTS.normal};
+  padding: ${SPACES.xxs} ${SPACES.xs};
   border-radius: 3px;
   box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
   text-decoration: none;
@@ -130,10 +132,10 @@ export const StyleLink = styled(Link)`
   align-items: center;
   cursor: pointer;
   background-color: #a3a2a2;
-  color: ${APP_KEYS.COLORS_KEYS.WHITE};
-  font-size: 15px;
-  font-weight: 500;
-  padding: 5px 10px;
+  color: ${COLORS.WHITE};
+  font-size: ${FONTS.FONT_SIZES.m};
+  font-weight: ${FONTS.WEIGHTS.normal};
+  padding: ${SPACES.xxs} ${SPACES.xs};
   border-radius: 3px;
   box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
   text-decoration: none;
@@ -175,7 +177,7 @@ export const PublicWrapper = styled(PrivateWrapper)`
 export const PrivateToggle = styled('div')`
   width: 25px;
   height: 25px;
-  background-color: ${APP_KEYS.COLORS_KEYS.WHITE};
+  background-color: ${COLORS.WHITE};
   border-radius: 50%;
 `;
 
@@ -187,7 +189,7 @@ export const TabletWrapper = styled.div`
   @media screen and (min-width: 768px) {
     display: block;
     /* background: rgb(66, 67, 92); */
-    padding: 30px 0;
+    padding: ${SPACES.xl} 0;
     text-align: center;
     height: 100vh;
     .colavo-carousel-dots {
@@ -199,7 +201,7 @@ export const TabletWrapper = styled.div`
       & li {
         list-style: none;
         display: inline-block;
-        margin: 20px 5px;
+        margin: ${SPACES.m} ${SPACES.xxs};
         & button {
           border: none;
           background: rgb(170, 170, 170);

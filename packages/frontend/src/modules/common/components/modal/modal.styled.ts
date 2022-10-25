@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { APP_KEYS } from '../../consts';
+import { SPACES } from '../../../theme/spaces.const';
+import { COLORS } from '../../../theme/colors.const';
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -24,17 +25,17 @@ export const Modal = styled.div`
   width: 380px;
   height: 340px;
 
-  background-color: ${APP_KEYS.COLORS_KEYS.WHITE};
+  background-color: ${COLORS.WHITE};
   box-shadow: 10px 10px 30px rgba(82, 85, 95, 0.4);
   border-radius: 30px;
-  padding: 20px;
+  padding: ${SPACES.m};
   background-color: #f8f8f7;
 `;
 
 export const CloseModalBtn = styled.div`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: ${SPACES.m};
+  right: ${SPACES.m};
 
   display: flex;
   justify-content: center;

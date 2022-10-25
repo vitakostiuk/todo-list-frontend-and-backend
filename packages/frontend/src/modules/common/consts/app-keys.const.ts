@@ -30,10 +30,3 @@ export const ROUTER_KEYS = {
   HOME: 'home',
   AUTHORIZED: 'authorized'
 };
-
-export const COLORS_KEYS = {
-  ACCENT: '#ff751d',
-  BLACK: '#2a2a2a',
-  GRAY: '#4b4c52',
-  WHITE: '#ffffff'
-};

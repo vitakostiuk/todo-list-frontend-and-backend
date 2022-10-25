@@ -1,29 +1,31 @@
 import styled from 'styled-components';
 import { Field } from 'formik';
-import { APP_KEYS } from '../../consts';
+import { FONTS } from '../../../theme';
+import { SPACES } from '../../../theme/spaces.const';
+import { COLORS } from '../../../theme/colors.const';
 
 export const TodoTitle = styled('h2')`
-  font-size: 25px;
-  font-weight: 700;
-  color: ${APP_KEYS.COLORS_KEYS.BLACK};
-  margin-bottom: 30px;
-  margin-top: 20px;
+  font-size: ${FONTS.FONT_SIZES.l};
+  font-weight: ${FONTS.WEIGHTS.bold};
+  color: ${COLORS.BLACK};
+  margin-bottom: ${SPACES.xl};
+  margin-top: ${SPACES.m};
 `;
 
 export const Title = styled('h3')`
-  font-size: 15px;
-  font-weight: 500;
-  color: ${APP_KEYS.COLORS_KEYS.BLACK};
+  font-size: ${FONTS.FONT_SIZES.m};
+  font-weight: ${FONTS.WEIGHTS.normal};
+  color: ${COLORS.BLACK};
 `;
 
 export const Describtion = styled('p')`
   display: block;
   word-wrap: break-word;
-  font-size: 15px;
-  font-weight: 700;
-  color: ${APP_KEYS.COLORS_KEYS.BLACK};
-  margin-top: 10px;
-  margin-bottom: 30px;
+  font-size: ${FONTS.FONT_SIZES.m};
+  font-weight: ${FONTS.WEIGHTS.bold};
+  color: ${COLORS.BLACK};
+  margin-top: ${SPACES.xs};
+  margin-bottom: ${SPACES.xl};
 `;
 
 export const StateWrapper = styled('div')`
@@ -31,7 +33,7 @@ export const StateWrapper = styled('div')`
   justify-content: space-between;
   align-items: center;
   /* border: 1px solid red; */
-  margin-bottom: 10px;
+  margin-bottom: ${SPACES.xs};
 `;
 
 export const TrueWrapper = styled('div')`
@@ -46,7 +48,7 @@ export const TrueWrapper = styled('div')`
 export const Toggle = styled('div')`
   width: 25px;
   height: 25px;
-  background-color: ${APP_KEYS.COLORS_KEYS.WHITE};
+  background-color: ${COLORS.WHITE};
   border-radius: 50%;
 `;
 
@@ -67,16 +69,16 @@ export const BtnEdit = styled('button')`
   align-items: center;
   cursor: pointer;
   background-color: #a3a2a2;
-  color: ${APP_KEYS.COLORS_KEYS.WHITE};
-  font-size: 15px;
-  font-weight: 500;
-  padding: 5px 10px;
+  color: ${COLORS.WHITE};
+  font-size: ${FONTS.FONT_SIZES.m};
+  font-weight: ${FONTS.WEIGHTS.normal};
+  padding: ${SPACES.xxs} ${SPACES.xs};
   border-radius: 3px;
   box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
   text-decoration: none;
   transition: transform 500ms;
   border: none;
-  margin-bottom: 200px;
+  margin-bottom: ${SPACES.xxxl};
 
   &:hover {
     transform: scale(1.03);
@@ -85,7 +87,7 @@ export const BtnEdit = styled('button')`
 
 export const BtnBack = styled(BtnEdit)`
   width: 100px;
-  background-color: ${APP_KEYS.COLORS_KEYS.ACCENT};
+  background-color: ${COLORS.ACCENT};
 `;
 
 export const EditWrapper = styled('div')`
@@ -97,10 +99,10 @@ export const FormContainer = styled('div')`
   top: 30px;
   left: 0;
 
-  background-color: ${APP_KEYS.COLORS_KEYS.WHITE};
+  background-color: ${COLORS.WHITE};
   box-shadow: 10px 10px 30px rgba(82, 85, 95, 0.4);
   border-radius: 30px;
-  padding: 20px;
+  padding: ${SPACES.m};
 `;
 
 export const Textarea = styled(Field)`

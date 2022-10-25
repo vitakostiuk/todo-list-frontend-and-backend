@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Field } from 'formik';
-import { APP_KEYS } from '../../consts';
+import { FONTS } from '../../../theme';
+import { SPACES } from '../../../theme/spaces.const';
+import { COLORS } from '../../../theme/colors.const';
 
 export const Container = styled('div')`
   display: block;
@@ -9,8 +11,8 @@ export const Container = styled('div')`
 
 export const FormTitle = styled('h1')`
   text-align: center;
-  font-size: 25px;
-  font-weight: 700;
+  font-size: ${FONTS.FONT_SIZES.l};
+  font-weight: ${FONTS.WEIGHTS.bold};
 `;
 
 export const InputWrapper = styled('div')`
@@ -19,36 +21,12 @@ export const InputWrapper = styled('div')`
 `;
 
 export const Label = styled('label')`
-  margin-left: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: 15px;
-  font-weight: 700;
+  margin-left: ${SPACES.xs};
+  margin-top: ${SPACES.xxs};
+  margin-bottom: ${SPACES.xxs};
+  font-size: ${FONTS.FONT_SIZES.m};
+  font-weight: ${FONTS.WEIGHTS.bold};
 `;
-
-// export const StyleField = styled(Field)`
-//   background-color: ${APP_KEYS.COLORS_KEYS.WHITE};
-//   border: 1px solid ${APP_KEYS.COLORS_KEYS.GRAY};
-//   color: ${APP_KEYS.COLORS_KEYS.GRAY};
-//   border-radius: 4px;
-//   font-size: 15px;
-//   font-style: normal;
-//   font-weight: 400;
-//   width: 100%;
-//   padding: 5px 10px;
-
-//   &:focus,
-//   &:active {
-//     box-shadow: rgb(210, 213, 217) 0px 0px 2px 1px, rgb(227, 230, 232) 0px 0px 0px 3px;
-//     border: 1px solid ${APP_KEYS.COLORS_KEYS.ACCENT};
-//     outline: none;
-//   }
-// `;
-
-// export const Textarea = styled(StyleField)`
-//   /* resize: none; */
-//   height: 100px;
-// `;
 
 export const InputCheckbox = styled(InputWrapper)`
   display: flex;
@@ -56,23 +34,23 @@ export const InputCheckbox = styled(InputWrapper)`
 `;
 
 export const FieldCheckbox = styled(Field)`
-  margin-left: 20px;
+  margin-left: ${SPACES.m};
 `;
 
 export const Button = styled('button')`
   border: none;
   cursor: pointer;
   background-color: #acacac;
-  color: ${APP_KEYS.COLORS_KEYS.ACCENT};
-  font-size: 15px;
-  font-weight: 700;
-  padding: 5px 10px;
+  color: ${COLORS.ACCENT};
+  font-size: ${FONTS.FONT_SIZES.m};
+  font-weight: ${FONTS.WEIGHTS.bold};
+  padding: ${SPACES.xxs} ${SPACES.xs};
   border-radius: 3px;
   box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
 
   &:hover {
-    background-color: ${APP_KEYS.COLORS_KEYS.ACCENT};
-    color: #fff;
+    background-color: ${COLORS.ACCENT};
+    color: ${COLORS.WHITE};
   }
 `;
 
