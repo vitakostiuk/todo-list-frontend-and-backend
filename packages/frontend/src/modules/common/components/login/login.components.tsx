@@ -31,8 +31,9 @@ const Login = () => {
     <Styled.Container>
       <Formik
         initialValues={initialValues}
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         onSubmit={(values, actions) => {
-          console.log(values, actions);
+          // console.log(values, actions);
         }}
       >
         <Form>
