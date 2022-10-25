@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 import { IStatusPrivate, IStatusCompleted } from '../common/types/todos.type';
+import { IUser } from '../common/types/user.types';
 
 interface IInitialValue {
   title: string;
@@ -30,7 +31,7 @@ export class HttpSerivce {
     return this.fetchingService.get(this.getFullApiUrl(config.url));
   }
 
-  add(config: { url: string; data: IInitialValue }) {
+  add(config: { url: string; data: IInitialValue | IUser }) {
     return this.fetchingService.post(this.getFullApiUrl(config.url), config.data);
   }
 
