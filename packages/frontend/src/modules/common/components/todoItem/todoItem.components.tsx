@@ -14,7 +14,7 @@ interface IParams {
   todoId: string;
 }
 
-interface MyFormValues {
+interface IMyFormValues {
   title: string;
   description: string;
   toggle: boolean;
@@ -47,7 +47,7 @@ const TodoItem = () => {
   const updateCompletedMutation = useUpdateCompleted();
   // console.log('updateCompletedMutation', updateCompletedMutation);
 
-  const initialValues: MyFormValues = {
+  const initialValues: IMyFormValues = {
     title: data?.data.title,
     description: data?.data.todo,
     toggle: data?.data.private,

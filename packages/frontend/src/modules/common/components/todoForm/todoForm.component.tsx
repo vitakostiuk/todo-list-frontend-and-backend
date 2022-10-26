@@ -5,7 +5,7 @@ import { useAddTodo } from '../../hooks/useAddTodo';
 import Input from '../input';
 import * as Styled from './todoForm.styled';
 
-interface MyFormValues {
+interface IMyFormValues {
   title: string;
   description: string;
   toggle: boolean;
@@ -16,7 +16,7 @@ interface IProps {
 }
 
 export const TodoForm = ({ onClick }: IProps) => {
-  const initialValues: MyFormValues = { title: '', description: '', toggle: false };
+  const initialValues: IMyFormValues = { title: '', description: '', toggle: false };
 
   const addTodoMutation = useAddTodo();
 

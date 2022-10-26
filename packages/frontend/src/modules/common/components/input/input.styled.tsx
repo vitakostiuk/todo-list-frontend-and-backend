@@ -10,9 +10,9 @@ export const InputWrapper = styled('div')`
 `;
 
 export const Label = styled('label')`
-  margin-left: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-left: ${SPACES.xs};
+  margin-top: ${SPACES.xxs};
+  margin-bottom: ${SPACES.xxs};
   font-size: ${FONTS.FONT_SIZES.m};
   font-weight: 700;
 `;

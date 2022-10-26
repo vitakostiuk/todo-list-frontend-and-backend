@@ -4,7 +4,7 @@ import { SPACES } from '../../../theme/spaces.const';
 import { COLORS } from '../../../theme/colors.const';
 
 export const Container = styled('div')`
-  padding: 0 15px;
+  padding: 0 ${SPACES.s};
   /* border: 1px solid red; */
 
   @media screen and (min-width: 768px) {
