@@ -30,6 +30,7 @@ export const ROUTER_KEYS = {
   HOME: '/home',
   LOGIN: '/login',
   REGISTER: '/register',
+  PROFILE: '/profile',
   AUTHORIZED: 'authorized'
 };
 

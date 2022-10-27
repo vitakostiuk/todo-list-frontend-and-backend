@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
 import { useHistory, useLocation } from 'react-router-dom';
 import * as Yup from 'yup';
-import { useRegister } from '../../hooks/useRegister';
 import { IUser } from '../../types/user.types';
-import * as Styled from './register.styled';
+// import { useLogin } from '../../hooks/useLogin';
+import { useChangePassword } from '../../hooks/useChangePassword';
+// import { useLogout } from '../../hooks/useLogout';
+import * as Styled from '../register/register.styled';
 
 interface IMyFormValues {
   email: string;
   password: string;
-  confirm: string;
+  newPassword: string;
 }
 
 interface ILocation {
@@ -18,19 +20,43 @@ interface ILocation {
   };
 }
 
-const Register = () => {
-  const initialValues: IMyFormValues = { email: '', password: '', confirm: '' };
+// interface IResponse {
+//   data: {
+//     data: {
+//       token: string;
+//       user: {
+//         email: string;
+//         _id: string;
+//       };
+//     };
+//   };
+//   mutate: (data: IUser) => void;
+// }
 
-  const registerMutation = useRegister();
-  // console.log('registerMutation', registerMutation);
+const Profile = () => {
+  const [isClickLogout, setIsClickLogout] = useState(false);
+  const initialValues: IMyFormValues = { email: '', password: '', newPassword: '' };
 
   const location: ILocation = useLocation();
   const [link] = useState(() => location?.state?.from);
+
+  const changePasswordMutation = useChangePassword();
+  // console.log('changePasswordMutation', changePasswordMutation);
 
   const history = useHistory();
 
   const onClickGoBack = () => {
     history.push(link);
+  };
+
+  const onClickLogout = () => {
+    setIsClickLogout((prevState) => !prevState);
+
+    if (isClickLogout) {
+      // const queryLogout = useLogout();
+      // console.log('queryLogout', queryLogout);
+      window.localStorage.setItem('token', '');
+    }
   };
 
   return (
@@ -42,20 +68,20 @@ const Register = () => {
           password: Yup.string()
             .min(6, 'Password must be at least 6 characters')
             .required('Password is required'),
-          confirm: Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Passwords must match')
-            .required('Confirm Password is required')
+          newPassword: Yup.string()
+            .min(6, 'Password must be at least 6 characters')
+            .required('Password is required')
         })}
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         onSubmit={(values, actions) => {
           const credentials: IUser = {
             email: values.email,
-            password: values.password
+            password: values.password,
+            newPassword: values.newPassword
           };
-          registerMutation.mutate(credentials);
+          changePasswordMutation.mutate(credentials);
           // eslint-disable-next-line no-alert, prefer-template
-          alert('Registration was successful. Log in to enter your account!');
-          history.push('/login');
+          // history.push('/home');
           // console.log(values, actions);
         }}
       >
@@ -89,17 +115,17 @@ const Register = () => {
               {(msg) => <Styled.InlineErrorMessage>{msg}</Styled.InlineErrorMessage>}
             </ErrorMessage>
 
-            <Styled.Label htmlFor="confirm">
-              Confirm
+            <Styled.Label htmlFor="newPassword">
+              New Password
               <Styled.StyleField
                 type="password"
-                name="confirm"
-                placeholder="your confirm password"
+                name="newPassword"
+                placeholder="your password"
                 valid={touched.password && !errors.password}
                 error={touched.password && errors.password}
               />
             </Styled.Label>
-            <ErrorMessage name="confirm">
+            <ErrorMessage name="newPassword">
               {(msg) => <Styled.InlineErrorMessage>{msg}</Styled.InlineErrorMessage>}
             </ErrorMessage>
 
@@ -111,7 +137,6 @@ const Register = () => {
               </Styled.Submit>
             </Styled.BtnWrap>
             <Styled.BtnWrap>
-              {' '}
               <Styled.Button type="button" onClick={onClickGoBack}>
                 Back
               </Styled.Button>
@@ -119,38 +144,13 @@ const Register = () => {
           </Form>
         )}
       </Formik>
+      <Styled.BtnWrap>
+        <Styled.Button type="button" onClick={onClickLogout}>
+          Logout
+        </Styled.Button>
+      </Styled.BtnWrap>
     </Styled.Container>
   );
 };
 
-export default Register;
-
-// (
-//   <Styled.Container>
-//     <Formik
-//       initialValues={initialValues}
-//       onSubmit={(values, actions) => {
-//         confirmPassword(values.email, values.password, values.confirm);
-//         // eslint-disable-next-line no-console
-//         console.log(values, actions);
-//       }}
-//     >
-//       <Form>
-//         <Input label="Email" name="email" />
-//         <Input label="Password" name="password" />
-//         <Input label="Confirm" name="confirm" />
-
-// <Styled.BtnWrap>
-//   {' '}
-//   <Styled.Button type="submit">Submit</Styled.Button>
-// </Styled.BtnWrap>
-// <Styled.BtnWrap>
-//   {' '}
-//   <Styled.Button type="button" onClick={onClickGoBack}>
-//     Back
-//   </Styled.Button>
-// </Styled.BtnWrap>
-//       </Form>
-//     </Formik>
-//   </Styled.Container>
-// );
+export default Profile;

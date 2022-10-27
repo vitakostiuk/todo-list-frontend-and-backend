@@ -10,6 +10,13 @@ interface IInitialValue {
   completed: boolean;
 }
 
+interface IConfig {
+  url: string;
+  data?: IInitialValue | IUser | IStatusPrivate | IStatusCompleted;
+  id?: string;
+  [key: string]: any;
+}
+
 export class HttpSerivce {
   baseUrl: string | undefined;
 
@@ -27,37 +34,108 @@ export class HttpSerivce {
     return `${this.baseUrl}/${this.apiVersion}/${url}`;
   }
 
-  get(config: { url: string }) {
-    return this.fetchingService.get(this.getFullApiUrl(config.url));
+  private populateTokenToHeaderConfig(): { Authorization: string | null } {
+    return {
+      Authorization: `Bearer ${localStorage.getItem('token')?.slice(1, -1)}`
+    };
   }
 
-  add(config: { url: string; data: IInitialValue | IUser }) {
-    return this.fetchingService.post(this.getFullApiUrl(config.url), config.data);
+  private extractUrlAndDataFromConfig({ data, url, ...configWithoutDataAndUrl }: IConfig) {
+    return configWithoutDataAndUrl;
   }
 
-  getOne(config: { url: string; id: string }) {
-    return this.fetchingService.get(this.getFullApiUrl(`${config.url}/${config.id}`));
-  }
-
-  remove(config: { url: string; id: string }) {
-    return this.fetchingService.delete(this.getFullApiUrl(`${config.url}/${config.id}`));
-  }
-
-  put(config: { url: string; data: IInitialValue; id: string }) {
-    return this.fetchingService.put(this.getFullApiUrl(`${config.url}/${config.id}`), config.data);
-  }
-
-  updatePrivateField(config: { url: string; data: IStatusPrivate; id: string }) {
-    return this.fetchingService.patch(
-      this.getFullApiUrl(`${config.url}/${config.id}/status`),
-      config.data
+  get(config: IConfig, withAuth: boolean = true) {
+    if (withAuth) {
+      config.headers = {
+        ...config.headers,
+        ...this.populateTokenToHeaderConfig()
+      };
+    }
+    return this.fetchingService.get(
+      this.getFullApiUrl(config.url),
+      this.extractUrlAndDataFromConfig(config)
     );
   }
 
-  updateCompletedField(config: { url: string; data: IStatusCompleted; id: string }) {
+  add(config: IConfig, withAuth: boolean = true) {
+    if (withAuth) {
+      config.headers = {
+        ...config.headers,
+        ...this.populateTokenToHeaderConfig()
+      };
+    }
+    return this.fetchingService.post(
+      this.getFullApiUrl(config.url),
+      config.data,
+      this.extractUrlAndDataFromConfig(config)
+    );
+  }
+
+  getOne(config: IConfig, withAuth: boolean = true) {
+    if (withAuth) {
+      config.headers = {
+        ...config.headers,
+        ...this.populateTokenToHeaderConfig()
+      };
+    }
+    return this.fetchingService.get(
+      this.getFullApiUrl(`${config.url}/${config.id}`),
+      this.extractUrlAndDataFromConfig(config)
+    );
+  }
+
+  remove(config: IConfig, withAuth: boolean = true) {
+    if (withAuth) {
+      config.headers = {
+        ...config.headers,
+        ...this.populateTokenToHeaderConfig()
+      };
+    }
+    return this.fetchingService.delete(
+      this.getFullApiUrl(`${config.url}/${config.id}`),
+      this.extractUrlAndDataFromConfig(config)
+    );
+  }
+
+  put(config: IConfig, withAuth: boolean = true) {
+    if (withAuth) {
+      config.headers = {
+        ...config.headers,
+        ...this.populateTokenToHeaderConfig()
+      };
+    }
+    return this.fetchingService.put(
+      this.getFullApiUrl(`${config.url}/${config.id}`),
+      config.data,
+      this.extractUrlAndDataFromConfig(config)
+    );
+  }
+
+  updatePrivateField(config: IConfig, withAuth: boolean = true) {
+    if (withAuth) {
+      config.headers = {
+        ...config.headers,
+        ...this.populateTokenToHeaderConfig()
+      };
+    }
     return this.fetchingService.patch(
-      this.getFullApiUrl(`${config.url}/${config.id}/status`),
-      config.data
+      this.getFullApiUrl(`${config.url}/${config.id}/private`),
+      config.data,
+      this.extractUrlAndDataFromConfig(config)
+    );
+  }
+
+  updateCompletedField(config: IConfig, withAuth: boolean = true) {
+    if (withAuth) {
+      config.headers = {
+        ...config.headers,
+        ...this.populateTokenToHeaderConfig()
+      };
+    }
+    return this.fetchingService.patch(
+      this.getFullApiUrl(`${config.url}/${config.id}/completed`),
+      config.data,
+      this.extractUrlAndDataFromConfig(config)
     );
   }
 }

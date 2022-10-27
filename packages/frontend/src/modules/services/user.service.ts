@@ -12,49 +12,36 @@ class UserService extends HttpSerivce {
   }
 
   register(credentials: IUser) {
-    return this.add({
-      url: 'user/register',
-      data: credentials
-    });
+    return this.add(
+      {
+        url: 'user/register',
+        data: credentials
+      },
+      false
+    );
   }
 
   login(credentials: IUser) {
+    return this.add(
+      {
+        url: 'user/login',
+        data: credentials
+      },
+      false
+    );
+  }
+
+  changePassword(credentials: IUser) {
     return this.add({
-      url: 'user/login',
+      url: 'user/change-password',
       data: credentials
     });
   }
 
-  // removeById(todoId: string) {
-  //   return this.remove({
-  //     url: 'todos',
-  //     id: todoId
-  //   });
-  // }
-
-  // updateById(todo: IAddTodo, todoId: string) {
-  //   return this.put({
-  //     url: 'todos',
-  //     data: todo,
-  //     id: todoId
-  //   });
-  // }
-
-  // updatePrivate(privateStatus: IStatusPrivate, todoId: string) {
-  //   return this.updatePrivateField({
-  //     url: 'todos',
-  //     data: privateStatus,
-  //     id: todoId
-  //   });
-  // }
-
-  // updateCompleted(completedStatus: IStatusCompleted, todoId: string) {
-  //   return this.updateCompletedField({
-  //     url: 'todos',
-  //     data: completedStatus,
-  //     id: todoId
-  //   });
-  // }
+  logout() {
+    const result = this.get({ url: 'user/logout' }, true);
+    return result;
+  }
 }
 
 export default new UserService();

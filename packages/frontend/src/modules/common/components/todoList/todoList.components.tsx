@@ -22,7 +22,7 @@ const settings = {
   dots: true,
   centerMode: true,
   centerPadding: '70px',
-  slidesToShow: 3,
+  slidesToShow: 1,
   speed: 500,
   dotsClass: 'colavo-carousel-dots',
   responsive: [
@@ -39,6 +39,7 @@ const settings = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TodoList = ({ filter }: IProps) => {
   const allTodosQuery = useGetAllTodos();
+  console.log('allTodosQuery', allTodosQuery);
 
   const location: ILocation = useLocation();
 

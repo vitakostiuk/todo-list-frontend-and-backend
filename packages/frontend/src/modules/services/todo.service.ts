@@ -1,4 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
+// import axios from 'axios';
 import { HttpSerivce } from './http.service';
 import { ITodo, IAddTodo, IStatusPrivate, IStatusCompleted } from '../common/types/todos.type';
 
@@ -13,53 +14,71 @@ class TodoService extends HttpSerivce {
   }
 
   getAllTodos() {
-    const result: IResponse = this.get({ url: 'todos' });
+    const result: IResponse = this.get({ url: 'todos' }, true);
     return result;
   }
 
   addTodo(todo: IAddTodo) {
-    return this.add({
-      url: 'todos',
-      data: todo
-    });
+    return this.add(
+      {
+        url: 'todos',
+        data: todo
+      },
+      true
+    );
   }
 
   getById(todoId: string) {
-    return this.getOne({
-      url: 'todos',
-      id: todoId
-    });
+    return this.getOne(
+      {
+        url: 'todos',
+        id: todoId
+      },
+      true
+    );
   }
 
   removeById(todoId: string) {
-    return this.remove({
-      url: 'todos',
-      id: todoId
-    });
+    return this.remove(
+      {
+        url: 'todos',
+        id: todoId
+      },
+      true
+    );
   }
 
   updateById(todo: IAddTodo, todoId: string) {
-    return this.put({
-      url: 'todos',
-      data: todo,
-      id: todoId
-    });
+    return this.put(
+      {
+        url: 'todos',
+        data: todo,
+        id: todoId
+      },
+      true
+    );
   }
 
   updatePrivate(privateStatus: IStatusPrivate, todoId: string) {
-    return this.updatePrivateField({
-      url: 'todos',
-      data: privateStatus,
-      id: todoId
-    });
+    return this.updatePrivateField(
+      {
+        url: 'todos',
+        data: privateStatus,
+        id: todoId
+      },
+      true
+    );
   }
 
   updateCompleted(completedStatus: IStatusCompleted, todoId: string) {
-    return this.updateCompletedField({
-      url: 'todos',
-      data: completedStatus,
-      id: todoId
-    });
+    return this.updateCompletedField(
+      {
+        url: 'todos',
+        data: completedStatus,
+        id: todoId
+      },
+      true
+    );
   }
 }
 
