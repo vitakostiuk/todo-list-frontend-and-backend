@@ -1,15 +1,19 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
+import { useHistory } from 'react-router-dom';
 import UserService from '../../services/user.service';
 import { IUser } from '../types/user.types';
-import { APP_KEYS } from '../consts';
 
 export const useRegister = () => {
-  const client = useQueryClient();
+  // const client = useQueryClient();
+  const history = useHistory();
 
   const mutate = useMutation((credentials: IUser) => UserService.register(credentials), {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onSettled(...params) {
-      client.invalidateQueries(APP_KEYS.QUERY_KEYS.TODOS);
+    onSuccess: () => {
+      alert('Registration was successful. Log in to enter your account!');
+      history.push('/login');
+    },
+    onError: (error: any) => {
+      alert(error.message);
     }
   });
 

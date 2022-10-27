@@ -42,6 +42,11 @@ class UserService extends HttpSerivce {
     const result = this.get({ url: 'user/logout' }, true);
     return result;
   }
+
+  current() {
+    const result = this.get({ url: 'user/current' }, true);
+    return result;
+  }
 }
 
 export default new UserService();

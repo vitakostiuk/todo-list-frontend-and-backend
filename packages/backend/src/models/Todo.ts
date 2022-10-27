@@ -8,8 +8,8 @@ export interface ITodo extends Document {
 }
 
 const addSchema: Joi.ObjectSchema<any> = Joi.object({
-  todo: Joi.string().min(2).required(),
-  title: Joi.string().min(2).required(),
+  todo: Joi.string().min(2),
+  title: Joi.string().min(2),
   private: Joi.boolean(),
   completed: Joi.boolean()
 });
@@ -18,15 +18,15 @@ const todoSchema: Schema = new Schema(
   {
     title: {
       type: String,
-      required: true
+      required: false
     },
     todo: {
       type: String,
-      required: true
+      required: false
     },
     private: {
       type: Boolean,
-      required: true
+      required: false
     },
     completed: {
       type: Boolean,
@@ -35,6 +35,10 @@ const todoSchema: Schema = new Schema(
     owner: {
       type: Schema.Types.ObjectId,
       ref: 'User'
+    },
+    status: {
+      type: String,
+      required: false
     }
   },
   { versionKey: false, timestamps: true }

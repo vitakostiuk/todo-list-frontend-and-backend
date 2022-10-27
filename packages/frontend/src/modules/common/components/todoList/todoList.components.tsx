@@ -75,7 +75,7 @@ const TodoList = ({ filter }: IProps) => {
               <Styled.Title>{title}</Styled.Title>
               <Styled.Describtion>{todo}</Styled.Describtion>
               <Styled.BtnWrapper>
-                <Styled.StyleLink to={{ pathname: `/${_id}`, state: { from: location } }}>
+                <Styled.StyleLink to={{ pathname: '/todo', state: { from: location, id: _id } }}>
                   Viev
                 </Styled.StyleLink>
                 <Styled.Button type="button" onClick={() => removeByIdMutation.mutate(_id)}>
@@ -109,7 +109,7 @@ const TodoList = ({ filter }: IProps) => {
                 <Styled.Title>{title}</Styled.Title>
                 <Styled.Describtion>{todo}</Styled.Describtion>
                 <Styled.BtnWrapper>
-                  <Styled.StyleLink to={{ pathname: `/${_id}`, state: { from: location } }}>
+                  <Styled.StyleLink to={{ pathname: '/todo', state: { from: location } }}>
                     Viev
                   </Styled.StyleLink>
                   <Styled.Button type="button" onClick={() => removeByIdMutation.mutate(_id)}>

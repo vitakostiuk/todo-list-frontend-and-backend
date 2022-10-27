@@ -6,15 +6,19 @@ import MainPage from '../pages/mainPage';
 import LoginPage from '../pages/loginPage';
 import RegisterPage from '../pages/registerPage';
 import ProfilePage from '../pages/profilePage';
+import { useGetCurrentUser } from '../common/hooks/useGetCurrentUser';
 import { APP_KEYS } from '../common/consts';
 
 export const MainRouter = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const queryUser = useGetCurrentUser();
+  // console.log('queryUser', queryUser);
   const isLoggedIn = window.localStorage.getItem('token');
   // console.log('isLoggedIn', isLoggedIn);
   return (
     <Router>
       <Switch>
-        {/* PUBLIC */}
+        {/* PUBLIC ROUTES */}
         <Route path={APP_KEYS.ROUTER_KEYS.HOME} exact>
           {!isLoggedIn ? <MainPage /> : <Redirect to={APP_KEYS.ROUTER_KEYS.ROOT} />}
         </Route>
@@ -24,7 +28,8 @@ export const MainRouter = () => {
         <Route path={APP_KEYS.ROUTER_KEYS.REGISTER} exact>
           {!isLoggedIn ? <RegisterPage /> : <Redirect to={APP_KEYS.ROUTER_KEYS.ROOT} />}
         </Route>
-        {/* PRIVATE */}
+
+        {/* PRIVATE ROUTES */}
         <Route path={APP_KEYS.ROUTER_KEYS.ROOT} exact>
           {isLoggedIn ? <HomePageContainer /> : <Redirect to={APP_KEYS.ROUTER_KEYS.HOME} />}
         </Route>

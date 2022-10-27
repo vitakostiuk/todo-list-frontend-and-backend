@@ -6,12 +6,20 @@ interface TypedRequestBody<T> extends Request {
   body: T;
 }
 
+interface IPrivate {
+  private: boolean;
+}
+
+interface ICompleted {
+  completed: boolean;
+}
+
 export class TodoController {
   constructor(private todoService: TodoService) {}
 
   async getAllTodo(req: TypedRequestBody<ITodo>) {
-    const { id: owner } = req.user;
-    const todos = await this.todoService.findAll(owner);
+    const { id } = req.user;
+    const todos = await this.todoService.findAll(id, req.query);
     return todos;
   }
 
@@ -40,9 +48,15 @@ export class TodoController {
     return result;
   }
 
-  async updateStatus(req: Request<{ todoId: string }, any, ITodo>) {
+  async updateStatusPrivate(req: Request<{ todoId: string }, any, IPrivate>) {
     const { todoId } = req.params;
-    const result = await this.todoService.updateStatus(todoId, req.body, { new: true });
+    const result = await this.todoService.updateStatusPrivate(todoId, req.body, { new: true });
+    return result;
+  }
+
+  async updateStatusCompleted(req: Request<{ todoId: string }, any, ICompleted>) {
+    const { todoId } = req.params;
+    const result = await this.todoService.updateStatusCompleted(todoId, req.body, { new: true });
     return result;
   }
 }

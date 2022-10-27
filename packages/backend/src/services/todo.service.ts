@@ -1,10 +1,57 @@
 import { Todo } from '../models/Todo';
 import { ITodo } from '../types/todos.type';
 
+interface IPrivate {
+  private: boolean;
+}
+
+interface ICompleted {
+  completed: boolean;
+}
+
+// interface IQueryParams {
+//   search?: string;
+//   status?: string;
+// }
+
 export default class TodoService {
-  async findAll(owner: string | undefined) {
-    const result = await Todo.find({ owner }).populate('owner', 'email');
+  async findAll(id: string | undefined, queryParams: any) {
+    const { search } = queryParams;
+    // console.log('status', status);
+
+    // const idToSearch = mongoose.Types.ObjectId(id);
+
+    // const todos = await Todo.aggregate([
+    //   {
+    //     $match: {
+    //       $or: [
+    //         {
+    //           owner: idToSearch,
+    //           title: search,
+    //           private: isPrivate
+    //         }
+    //       ]
+    //     }
+    //   }
+    // ]);
+    // console.log('todos', todos);
+
+    // if (!todos) {
+    //   return null;
+    // }
+
+    // return todos;
+
+    if (search === '') {
+      const result = await Todo.find({ owner: id }).populate('owner', 'email');
+      return result;
+    }
+
+    const result = await Todo.find({ owner: id, title: search }).populate('owner', 'email');
     return result;
+
+    // const result = await Todo.find({ owner }).populate('owner', 'email');
+    // return result;
   }
 
   async addTodo(body: ITodo) {
@@ -27,7 +74,12 @@ export default class TodoService {
     return result;
   }
 
-  async updateStatus(id: string, body: ITodo, obj: { new: boolean }) {
+  async updateStatusPrivate(id: string, body: IPrivate, obj: { new: boolean }) {
+    const result = await Todo.findByIdAndUpdate(id, body, obj);
+    return result;
+  }
+
+  async updateStatusCompleted(id: string, body: ICompleted, obj: { new: boolean }) {
     const result = await Todo.findByIdAndUpdate(id, body, obj);
     return result;
   }

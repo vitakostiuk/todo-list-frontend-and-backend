@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Formik, Form, ErrorMessage } from 'formik';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Formik } from 'formik';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { IUser } from '../../types/user.types';
+import FormComponent from '../reusable/form/form.components';
 // import { useLogin } from '../../hooks/useLogin';
 import { useChangePassword } from '../../hooks/useChangePassword';
-// import { useLogout } from '../../hooks/useLogout';
+import { useLogout } from '../../hooks/useLogout';
 import * as Styled from '../register/register.styled';
 
 interface IMyFormValues {
@@ -20,21 +21,7 @@ interface ILocation {
   };
 }
 
-// interface IResponse {
-//   data: {
-//     data: {
-//       token: string;
-//       user: {
-//         email: string;
-//         _id: string;
-//       };
-//     };
-//   };
-//   mutate: (data: IUser) => void;
-// }
-
 const Profile = () => {
-  const [isClickLogout, setIsClickLogout] = useState(false);
   const initialValues: IMyFormValues = { email: '', password: '', newPassword: '' };
 
   const location: ILocation = useLocation();
@@ -49,14 +36,11 @@ const Profile = () => {
     history.push(link);
   };
 
-  const onClickLogout = () => {
-    setIsClickLogout((prevState) => !prevState);
+  const { mutate: logout } = useLogout();
 
-    if (isClickLogout) {
-      // const queryLogout = useLogout();
-      // console.log('queryLogout', queryLogout);
-      window.localStorage.setItem('token', '');
-    }
+  const onClickLogout = () => {
+    logout();
+    window.localStorage.removeItem('token');
   };
 
   return (
@@ -80,74 +64,25 @@ const Profile = () => {
             newPassword: values.newPassword
           };
           changePasswordMutation.mutate(credentials);
-          // eslint-disable-next-line no-alert, prefer-template
-          // history.push('/home');
           // console.log(values, actions);
         }}
       >
-        {({ errors, touched, isValid, isSubmitting }) => (
-          <Form>
-            <Styled.Label htmlFor="email">
-              Email
-              <Styled.StyleField
-                type="email"
-                name="email"
-                placeholder="your email"
-                valid={touched.email && !errors.email}
-                error={touched.email && errors.email}
-              />
-            </Styled.Label>
-            <ErrorMessage name="email">
-              {(msg) => <Styled.InlineErrorMessage>{msg}</Styled.InlineErrorMessage>}
-            </ErrorMessage>
-
-            <Styled.Label htmlFor="password">
-              Password
-              <Styled.StyleField
-                type="password"
-                name="password"
-                placeholder="your password"
-                valid={touched.password && !errors.password}
-                error={touched.password && errors.password}
-              />
-            </Styled.Label>
-            <ErrorMessage name="password">
-              {(msg) => <Styled.InlineErrorMessage>{msg}</Styled.InlineErrorMessage>}
-            </ErrorMessage>
-
-            <Styled.Label htmlFor="newPassword">
-              New Password
-              <Styled.StyleField
-                type="password"
-                name="newPassword"
-                placeholder="your password"
-                valid={touched.password && !errors.password}
-                error={touched.password && errors.password}
-              />
-            </Styled.Label>
-            <ErrorMessage name="newPassword">
-              {(msg) => <Styled.InlineErrorMessage>{msg}</Styled.InlineErrorMessage>}
-            </ErrorMessage>
-
-            <Styled.BtnWrap>
-              {' '}
-              <Styled.Submit type="submit" disabled={!isValid || isSubmitting}>
-                {' '}
-                {isSubmitting ? 'Submiting...' : 'Submit'}
-              </Styled.Submit>
-            </Styled.BtnWrap>
-            <Styled.BtnWrap>
-              <Styled.Button type="button" onClick={onClickGoBack}>
-                Back
-              </Styled.Button>
-            </Styled.BtnWrap>
-          </Form>
+        {({ errors, touched, isValid }) => (
+          <FormComponent
+            email="email"
+            password="password"
+            errors={errors}
+            touched={touched}
+            isValid={isValid}
+            extraFieldName="newPassword"
+            onClickGoBack={onClickGoBack}
+          />
         )}
       </Formik>
       <Styled.BtnWrap>
-        <Styled.Button type="button" onClick={onClickLogout}>
+        <Link type="button" onClick={onClickLogout} to={{ pathname: '/' }}>
           Logout
-        </Styled.Button>
+        </Link>
       </Styled.BtnWrap>
     </Styled.Container>
   );

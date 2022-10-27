@@ -7,9 +7,14 @@ export const useLogin = () => {
   const client = useQueryClient();
 
   const mutate = useMutation((credentials: IUser) => UserService.login(credentials), {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onSettled(...params) {
-      client.invalidateQueries(APP_KEYS.QUERY_KEYS.TODOS);
+    onSuccess: () => {
+      alert('Login was successful. Enter your account!');
+    },
+    onError: (error: any) => {
+      alert(error.message);
+    },
+    onSettled() {
+      client.invalidateQueries(APP_KEYS.QUERY_KEYS.USER);
     }
   });
 

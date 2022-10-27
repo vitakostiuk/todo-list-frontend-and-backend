@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Formik, Form, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import { useHistory, useLocation } from 'react-router-dom';
 import * as Yup from 'yup';
 import { IUser } from '../../types/user.types';
 import { useLogin } from '../../hooks/useLogin';
+import FormComponent from '../reusable/form/form.components';
 import * as Styled from '../register/register.styled';
 
 interface IMyFormValues {
@@ -71,59 +72,18 @@ const Login = () => {
             password: values.password
           };
           loginMutation.mutate(credentials);
-          // eslint-disable-next-line no-alert, prefer-template
-          // history.push('/');
-          // console.log(values, actions);
+          setTimeout(() => history.push('/home'), 1000);
         }}
       >
-        {({ errors, touched, isValid, isSubmitting }) => (
-          <Form>
-            <Styled.Label htmlFor="email">
-              Email
-              <Styled.StyleField
-                type="email"
-                name="email"
-                placeholder="your email"
-                valid={touched.email && !errors.email}
-                error={touched.email && errors.email}
-              />
-            </Styled.Label>
-            <ErrorMessage name="email">
-              {(msg) => <Styled.InlineErrorMessage>{msg}</Styled.InlineErrorMessage>}
-            </ErrorMessage>
-
-            <Styled.Label htmlFor="password">
-              Password
-              <Styled.StyleField
-                type="password"
-                name="password"
-                placeholder="your password"
-                valid={touched.password && !errors.password}
-                error={touched.password && errors.password}
-              />
-            </Styled.Label>
-            <ErrorMessage name="password">
-              {(msg) => <Styled.InlineErrorMessage>{msg}</Styled.InlineErrorMessage>}
-            </ErrorMessage>
-
-            <Styled.BtnWrap>
-              {' '}
-              <Styled.Submit type="submit" disabled={!isValid || isSubmitting}>
-                {' '}
-                {isSubmitting ? 'Submiting...' : 'Submit'}
-              </Styled.Submit>
-            </Styled.BtnWrap>
-            <Styled.BtnWrap>
-              <Styled.Button type="button" onClick={onClickGoBack}>
-                Back
-              </Styled.Button>
-            </Styled.BtnWrap>
-            <Styled.BtnWrap>
-              <Styled.Button type="button" onClick={() => history.push('/')}>
-                GoToAccount
-              </Styled.Button>
-            </Styled.BtnWrap>
-          </Form>
+        {({ errors, touched, isValid }) => (
+          <FormComponent
+            email="email"
+            password="password"
+            errors={errors}
+            touched={touched}
+            isValid={isValid}
+            onClickGoBack={onClickGoBack}
+          />
         )}
       </Formik>
     </Styled.Container>

@@ -27,10 +27,16 @@ todosRouter.put(
   tryCatchWrapper(todoController.updateById.bind(todoController))
 );
 todosRouter.patch(
-  '/:todoId/status',
+  '/:todoId/private',
   login,
   validateTodo,
-  tryCatchWrapper(todoController.updateStatus.bind(todoController))
+  tryCatchWrapper(todoController.updateStatusPrivate.bind(todoController))
+);
+todosRouter.patch(
+  '/:todoId/completed',
+  login,
+  validateTodo,
+  tryCatchWrapper(todoController.updateStatusCompleted.bind(todoController))
 );
 
 export default todosRouter;
