@@ -39,7 +39,7 @@ const settings = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TodoList = ({ filter }: IProps) => {
   const allTodosQuery = useGetAllTodos();
-  console.log('allTodosQuery', allTodosQuery);
+  // console.log('allTodosQuery', allTodosQuery);
 
   const location: ILocation = useLocation();
 
