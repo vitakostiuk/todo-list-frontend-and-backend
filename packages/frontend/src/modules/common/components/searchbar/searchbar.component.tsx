@@ -4,15 +4,27 @@ import * as Styled from './searchbar.styled';
 
 interface IProps {
   handleChangeFilter: (text: string) => void;
+  handleFilterPrivate: (privateStatus: boolean) => void;
+  handleFilterCompleted: () => void;
+  handleAllFilter: () => void;
 }
 
-const Searchbar = ({ handleChangeFilter }: IProps) => {
+const Searchbar = ({
+  handleChangeFilter,
+  handleFilterPrivate,
+  handleFilterCompleted,
+  handleAllFilter
+}: IProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filter, setFilter] = useState('');
 
   const onChangeFilter = (e: any) => {
     setFilter(e.currentTarget.value);
     handleChangeFilter(e.currentTarget.value);
+  };
+
+  const onFilterPrivate = (privateStatus: boolean) => {
+    handleFilterPrivate(privateStatus);
   };
 
   return (
@@ -29,10 +41,18 @@ const Searchbar = ({ handleChangeFilter }: IProps) => {
         />
       </Styled.InputWrapper>
       <Styled.BtnList>
-        <Styled.Button type="button">All</Styled.Button>
-        <Styled.Button type="button">Public</Styled.Button>
-        <Styled.Button type="button">Private</Styled.Button>
-        <Styled.Button type="button">Completed</Styled.Button>
+        <Styled.Button type="button" onClick={handleAllFilter}>
+          All
+        </Styled.Button>
+        <Styled.Button type="button" onClick={() => onFilterPrivate(false)}>
+          Public
+        </Styled.Button>
+        <Styled.Button type="button" onClick={() => onFilterPrivate(true)}>
+          Private
+        </Styled.Button>
+        <Styled.Button type="button" onClick={handleFilterCompleted}>
+          Completed
+        </Styled.Button>
       </Styled.BtnList>
     </Styled.Container>
   );

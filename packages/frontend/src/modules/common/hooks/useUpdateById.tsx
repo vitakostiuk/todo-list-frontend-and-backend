@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 import TodoServise from '../../services/todo.service';
 import { IAddTodo } from '../types/todos.type';
 import { APP_KEYS } from '../consts';
@@ -16,14 +17,12 @@ export const useUpdateById = () => {
     {
       onSuccess: () => {
         // eslint-disable-next-line no-alert
-        alert('Update todo succeful');
+        toast.success('Update todo succeful');
       },
       onError: (error: any) => {
-        // eslint-disable-next-line no-alert
-        alert(error.message);
+        toast.error(error.message);
       },
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onSettled(...params) {
+      onSettled() {
         client.invalidateQueries(APP_KEYS.QUERY_KEYS.TODOS);
       }
     }

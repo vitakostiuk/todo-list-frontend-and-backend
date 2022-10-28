@@ -18,8 +18,9 @@ export class TodoController {
   constructor(private todoService: TodoService) {}
 
   async getAllTodo(req: TypedRequestBody<ITodo>) {
-    const { id } = req.user;
-    const todos = await this.todoService.findAll(id, req.query);
+    const { id: owner } = req.user;
+    const params = { ...req.query, owner };
+    const todos = await this.todoService.findAll(params);
     return todos;
   }
 

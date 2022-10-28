@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
 import { useHistory, useLocation } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import * as Yup from 'yup';
 import { IUser } from '../../types/user.types';
 import { useLogin } from '../../hooks/useLogin';

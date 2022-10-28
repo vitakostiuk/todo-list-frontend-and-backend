@@ -1,9 +1,5 @@
 import { HttpSerivce } from './http.service';
-import { ITodo, IAddTodo, IStatusPrivate, IStatusCompleted } from '../common/types/todos.type';
-
-interface IResponse {
-  data: ITodo[];
-}
+import { IAddTodo, IStatusPrivate, IStatusCompleted } from '../common/types/todos.type';
 
 class TodoService extends HttpSerivce {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
@@ -11,8 +7,8 @@ class TodoService extends HttpSerivce {
     super();
   }
 
-  getAllTodos() {
-    const result: IResponse = this.get({ url: 'todos' }, true);
+  getAllTodos(params: string) {
+    const result = this.get({ url: `todos/?${params}` }, true);
     return result;
   }
 

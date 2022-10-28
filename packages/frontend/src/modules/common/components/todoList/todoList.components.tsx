@@ -1,10 +1,9 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { useLocation } from 'react-router-dom';
-import { useGetAllTodos } from '../../hooks/useGetAllTodos';
 import { useRemoveById } from '../../hooks/useRemoveById';
 import { useUpdatePrivate } from '../../hooks/useUpdatePrivate';
-import { IStatusPrivate } from '../../types/todos.type';
+import { IStatusPrivate, ITodo } from '../../types/todos.type';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import * as Styled from './todoList.styled';
@@ -14,7 +13,12 @@ interface ILocation {
 }
 
 interface IProps {
-  filter: string;
+  isLoading: boolean;
+  isError: boolean;
+  todos: {
+    list: ITodo[];
+    count: number;
+  };
 }
 
 // Settings for slider
@@ -37,10 +41,7 @@ const settings = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const TodoList = ({ filter }: IProps) => {
-  const allTodosQuery = useGetAllTodos();
-  // console.log('allTodosQuery', allTodosQuery);
-
+const TodoList = ({ todos, isLoading, isError }: IProps) => {
   const location: ILocation = useLocation();
 
   const removeByIdMutation = useRemoveById();
@@ -48,16 +49,10 @@ const TodoList = ({ filter }: IProps) => {
   const updatePrivateMutation = useUpdatePrivate();
   // console.log('updatePrivateMutation', updatePrivateMutation);
 
-  const normalizedFilter = filter.toLowerCase();
-  const filteredTodos = allTodosQuery?.data?.data.filter((todo) =>
-    todo.title.toLowerCase().includes(normalizedFilter)
-  );
-  // console.log('filteredTodos', filteredTodos);
-
-  const onClickPrivateToggle = (id: string, privateStatus: IStatusPrivate) => {
+  const onClickPrivateToggle = (id: string, isPrivate: IStatusPrivate) => {
     const updatedPrivateStatus = {
       data: {
-        private: privateStatus.private
+        private: isPrivate.private
       },
       id
     };
@@ -66,11 +61,11 @@ const TodoList = ({ filter }: IProps) => {
   };
   return (
     <div>
-      {allTodosQuery.isLoading && <div>Loading....</div>}
+      {isLoading && <div>Loading....</div>}
       {/* Mobile List and Desktop List */}
-      {!allTodosQuery.isLoading && filteredTodos && (
+      {!isLoading && todos && (
         <Styled.List>
-          {filteredTodos.map(({ _id, title, todo, private: isPrivate }) => (
+          {todos?.list.map(({ _id, title, todo, private: isPrivate }) => (
             <Styled.Item key={_id}>
               <Styled.Title>{title}</Styled.Title>
               <Styled.Describtion>{todo}</Styled.Describtion>
@@ -101,10 +96,10 @@ const TodoList = ({ filter }: IProps) => {
       )}
 
       {/* Tablet List */}
-      {!allTodosQuery.isLoading && filteredTodos && (
+      {!isLoading && todos && (
         <Styled.TabletWrapper>
           <Slider {...settings} arrows={false}>
-            {filteredTodos.map(({ _id, title, todo, private: isPrivate }) => (
+            {todos?.list.map(({ _id, title, todo, private: isPrivate }) => (
               <Styled.Item key={_id}>
                 <Styled.Title>{title}</Styled.Title>
                 <Styled.Describtion>{todo}</Styled.Describtion>
@@ -134,7 +129,7 @@ const TodoList = ({ filter }: IProps) => {
           </Slider>
         </Styled.TabletWrapper>
       )}
-      {allTodosQuery.error && <div>Something went wrong</div>}
+      {isError && <div>Something went wrong</div>}
     </div>
   );
 };

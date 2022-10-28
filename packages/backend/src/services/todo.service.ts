@@ -1,6 +1,15 @@
 import { Todo } from '../models/Todo';
 import { ITodo } from '../types/todos.type';
 
+interface IParams {
+  owner: string;
+  title?: string;
+  private?: string;
+  completed?: string;
+  skip?: string;
+  limit?: string;
+}
+
 interface IPrivate {
   private: boolean;
 }
@@ -9,49 +18,22 @@ interface ICompleted {
   completed: boolean;
 }
 
-// interface IQueryParams {
-//   search?: string;
-//   status?: string;
-// }
-
 export default class TodoService {
-  async findAll(id: string | undefined, queryParams: any) {
-    const { search } = queryParams;
-    // console.log('status', status);
+  async findAll(params: IParams) {
+    const { owner, skip = 0, limit = 0, ...filter } = params;
+    const title = filter.title ? { title: { $regex: filter.title, $options: 'i' } } : {};
+    const count = await Todo.find({
+      $and: [{ ...filter, ...title }, { $or: [{ private: false }, { private: true, owner }] }]
+    });
 
-    // const idToSearch = mongoose.Types.ObjectId(id);
+    const list = await Todo.find({
+      $or: [{ private: false }, { private: true, owner }]
+    })
+      .find({ ...filter, ...title })
+      .skip(Number(skip))
+      .limit(Number(limit));
 
-    // const todos = await Todo.aggregate([
-    //   {
-    //     $match: {
-    //       $or: [
-    //         {
-    //           owner: idToSearch,
-    //           title: search,
-    //           private: isPrivate
-    //         }
-    //       ]
-    //     }
-    //   }
-    // ]);
-    // console.log('todos', todos);
-
-    // if (!todos) {
-    //   return null;
-    // }
-
-    // return todos;
-
-    if (search === '') {
-      const result = await Todo.find({ owner: id }).populate('owner', 'email');
-      return result;
-    }
-
-    const result = await Todo.find({ owner: id, title: search }).populate('owner', 'email');
-    return result;
-
-    // const result = await Todo.find({ owner }).populate('owner', 'email');
-    // return result;
+    return { list, count: count.length };
   }
 
   async addTodo(body: ITodo) {
