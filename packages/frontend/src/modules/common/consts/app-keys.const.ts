@@ -12,7 +12,8 @@ export const QUERY_KEYS = {
   TOKEN: 'TOKEN',
   STATISTIC: 'statistic',
   TRENDING: 'trending',
-  TODOS: 'todos'
+  TODOS: 'todos',
+  USER: 'user'
 };
 
 // Backend Routes
@@ -27,6 +28,10 @@ export const BACKEND_KEYS = {
 
 export const ROUTER_KEYS = {
   ROOT: '/',
-  HOME: 'home',
+  HOME: '/home',
+  LOGIN: '/login',
+  REGISTER: '/register',
+  PROFILE: '/profile',
+  TODO: '/todo',
   AUTHORIZED: 'authorized'
 };

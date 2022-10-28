@@ -18,18 +18,26 @@ const todoSchema: Schema = new Schema(
   {
     title: {
       type: String,
-      required: true
+      required: false
     },
     todo: {
       type: String,
-      required: true
+      required: false
     },
     private: {
       type: Boolean,
-      required: true
+      required: false
     },
     completed: {
       type: Boolean,
+      required: false
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    status: {
+      type: String,
       required: false
     }
   },

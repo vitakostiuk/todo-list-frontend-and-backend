@@ -14,6 +14,10 @@ export const useUpdatePrivate = () => {
   const mutate = useMutation(
     (values: IUpdatedTodo) => TodoServise.updatePrivate(values.data, values.id),
     {
+      onError: (error: any) => {
+        // eslint-disable-next-line no-alert
+        alert(error.message);
+      },
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onSettled(...params) {
         client.invalidateQueries(APP_KEYS.QUERY_KEYS.TODOS);

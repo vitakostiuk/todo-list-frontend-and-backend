@@ -22,7 +22,7 @@ const settings = {
   dots: true,
   centerMode: true,
   centerPadding: '70px',
-  slidesToShow: 3,
+  slidesToShow: 1,
   speed: 500,
   dotsClass: 'colavo-carousel-dots',
   responsive: [
@@ -39,6 +39,7 @@ const settings = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TodoList = ({ filter }: IProps) => {
   const allTodosQuery = useGetAllTodos();
+  // console.log('allTodosQuery', allTodosQuery);
 
   const location: ILocation = useLocation();
 
@@ -74,7 +75,7 @@ const TodoList = ({ filter }: IProps) => {
               <Styled.Title>{title}</Styled.Title>
               <Styled.Describtion>{todo}</Styled.Describtion>
               <Styled.BtnWrapper>
-                <Styled.StyleLink to={{ pathname: `/${_id}`, state: { from: location } }}>
+                <Styled.StyleLink to={{ pathname: '/todo', state: { from: location, id: _id } }}>
                   Viev
                 </Styled.StyleLink>
                 <Styled.Button type="button" onClick={() => removeByIdMutation.mutate(_id)}>
@@ -108,7 +109,7 @@ const TodoList = ({ filter }: IProps) => {
                 <Styled.Title>{title}</Styled.Title>
                 <Styled.Describtion>{todo}</Styled.Describtion>
                 <Styled.BtnWrapper>
-                  <Styled.StyleLink to={{ pathname: `/${_id}`, state: { from: location } }}>
+                  <Styled.StyleLink to={{ pathname: '/todo', state: { from: location } }}>
                     Viev
                   </Styled.StyleLink>
                   <Styled.Button type="button" onClick={() => removeByIdMutation.mutate(_id)}>

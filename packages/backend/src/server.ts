@@ -30,11 +30,17 @@ const schema = buildSchema(`
 `);
 
 // TODO: Create graphQL controller
+// Створюємо маршрут api/user
 const rootValue = {
   todos: async () => {
     // TODO: Create http service for that
     const todos = await axios.get('http://localhost:5000/api/todos');
     return todos.data;
+  },
+  user: async () => {
+    // USER: Create http service for that
+    const user = await axios.get('http://localhost:5000/api/user');
+    return user.data;
   }
 };
 

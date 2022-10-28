@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { useGetById } from '../../hooks/useGetById';
 import { useUpdateById } from '../../hooks/useUpdateById';
@@ -9,10 +9,6 @@ import * as Styled from './todoItem.styled';
 import * as FormStyled from '../todoForm/todoForm.styled';
 import { IStatusPrivate, IStatusCompleted } from '../../types/todos.type';
 import Input from '../input';
-
-interface IParams {
-  todoId: string;
-}
 
 interface IMyFormValues {
   title: string;
@@ -24,6 +20,7 @@ interface IMyFormValues {
 interface ILocation {
   state: {
     from: { pathname: string; search: string; hash: string; state: undefined };
+    id: string;
   };
 }
 
@@ -33,11 +30,9 @@ const TodoItem = () => {
 
   const [isOpenEditForm, setIsOpenEditForm] = useState(false);
 
-  const params: IParams = useParams();
-
   const history = useHistory();
 
-  const { data } = useGetById(params.todoId);
+  const { data } = useGetById(location?.state?.id);
 
   const updateByIdMutation = useUpdateById();
 
@@ -147,7 +142,7 @@ const TodoItem = () => {
                     private: values.toggle,
                     completed: values.completed
                   },
-                  id: params.todoId
+                  id: location?.state?.id
                 };
                 updateByIdMutation.mutate(updatedTodo);
                 // eslint-disable-next-line no-console

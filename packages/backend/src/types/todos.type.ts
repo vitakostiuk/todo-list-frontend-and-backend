@@ -5,6 +5,7 @@ export interface ITodo {
   todo: string;
   private: boolean;
   completed: boolean;
+  owner?: string;
 }
 
 export interface IError {
