@@ -1,14 +1,14 @@
 import { Todo } from '../models/Todo';
 import { ITodo } from '../types/todos.type';
 
-interface IParams {
-  owner: string;
-  title?: string;
-  private?: string;
-  completed?: string;
-  skip?: string;
-  limit?: string;
-}
+// interface IParams {
+//   owner: string;
+//   title?: string;
+//   private?: string;
+//   completed?: string;
+//   skip?: string;
+//   limit?: string;
+// }
 
 interface IPrivate {
   private: boolean;
@@ -19,21 +19,26 @@ interface ICompleted {
 }
 
 export default class TodoService {
-  async findAll(params: IParams) {
-    const { owner, skip = 0, limit = 0, ...filter } = params;
-    const title = filter.title ? { title: { $regex: filter.title, $options: 'i' } } : {};
-    const count = await Todo.find({
-      $and: [{ ...filter, ...title }, { $or: [{ private: false }, { private: true, owner }] }]
-    });
+  // async findAll(params: IParams) {
+  //   const { owner, skip = 0, limit = 0, ...filter } = params;
+  //   const title = filter.title ? { title: { $regex: filter.title, $options: 'i' } } : {};
+  //   const count = await Todo.find({
+  //     $and: [{ ...filter, ...title }, { $or: [{ private: false }, { private: true, owner }] }]
+  //   });
 
-    const list = await Todo.find({
-      $or: [{ private: false }, { private: true, owner }]
-    })
-      .find({ ...filter, ...title })
-      .skip(Number(skip))
-      .limit(Number(limit));
+  //   const list = await Todo.find({
+  //     $or: [{ private: false }, { private: true, owner }]
+  //   })
+  //     .find({ ...filter, ...title })
+  //     .skip(Number(skip))
+  //     .limit(Number(limit));
 
-    return { list, count: count.length };
+  //   return { list, count: count.length };
+  // }
+
+  async findAll(owner: string | undefined) {
+    const result = await Todo.find({ owner }).populate('owner', 'email');
+    return result;
   }
 
   async addTodo(body: ITodo) {

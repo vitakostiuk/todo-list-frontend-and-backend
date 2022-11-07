@@ -1,8 +1,10 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ThemeProvider } from 'styled-components';
 import { MainRouter } from '../navigation';
+import 'react-toastify/dist/ReactToastify.css';
 
 import * as theme from '../theme';
 import * as Styled from './app.styled';
@@ -25,6 +27,7 @@ const AppContainer = () => (
     <Styled.GlobalStyles />
     <QueryClientProvider client={queryClient}>
       <MainRouter />
+      <ToastContainer position="top-right" autoClose={3000} limit={1} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </ThemeProvider>

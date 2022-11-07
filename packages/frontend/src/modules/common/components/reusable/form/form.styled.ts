@@ -1,11 +1,13 @@
 import styled, { css } from 'styled-components';
 import { Field } from 'formik';
 import { APP_KEYS } from '../../../consts';
+import { SPACES } from '../../../../theme/spaces.const';
 import FilteredPropsInputField from './FilteredPropsInputField';
 
 export const Container = styled('div')`
   display: block;
   width: 100%;
+  /* border: 1px solid red; */
 `;
 
 export const FormTitle = styled('h1')`
@@ -163,7 +165,13 @@ export const Submit = styled(Button)`
   }
 `;
 
-export const BtnWrap = styled('div')`
+export const BtnContainer = styled('div')`
   display: flex;
   justify-content: center;
+`;
+
+export const BtnWrap = styled('div')`
+  &:first-child {
+    margin-right: ${SPACES.xl};
+  }
 `;

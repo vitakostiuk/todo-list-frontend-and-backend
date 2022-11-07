@@ -14,7 +14,9 @@ export const useRegister = () => {
       history.push('/login');
     },
     onError: (error: any) => {
-      toast.error(error.message);
+      toast.error('You are not authorized. Please log in or register.');
+      // eslint-disable-next-line no-console
+      console.log(error.message);
     }
   });
 

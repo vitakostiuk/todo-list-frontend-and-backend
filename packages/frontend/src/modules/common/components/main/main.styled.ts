@@ -3,14 +3,11 @@ import styled from 'styled-components';
 import { SPACES, COLORS, FONTS } from '../../../theme';
 
 export const Container = styled('div')`
-  display: block;
-  margin: 0 auto;
-  width: 350px;
-`;
-
-export const BtnWrap = styled('div')`
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100vh;
 `;
 
 export const StyleLink = styled(Link)`
@@ -43,4 +40,9 @@ export const StyleLink = styled(Link)`
   &:last-child {
     justify-self: end;
   }
+`;
+
+export const Title = styled('h1')`
+  display: block;
+  text-align: center;
 `;

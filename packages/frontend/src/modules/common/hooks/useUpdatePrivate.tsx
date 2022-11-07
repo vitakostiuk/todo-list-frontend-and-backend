@@ -18,8 +18,7 @@ export const useUpdatePrivate = () => {
       onError: (error: any) => {
         toast.error(error.message);
       },
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onSettled(...params) {
+      onSettled() {
         client.invalidateQueries(APP_KEYS.QUERY_KEYS.TODOS);
       }
     }

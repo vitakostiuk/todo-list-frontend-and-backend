@@ -9,10 +9,12 @@ export const useLogin = () => {
 
   const mutate = useMutation((credentials: IUser) => UserService.login(credentials), {
     onSuccess: () => {
-      toast.success('Login was successful. Enter your account!');
+      toast.success('Login was successful!');
     },
     onError: (error: any) => {
-      toast.error(error.message);
+      toast.error('You are not authorized. Please log in or register.');
+      // eslint-disable-next-line no-console
+      console.log(error.message);
     },
     onSettled() {
       client.invalidateQueries(APP_KEYS.QUERY_KEYS.USER);

@@ -68,19 +68,18 @@ const FormComponent = ({
       </>
     )}
 
-    <Styled.BtnWrap>
-      {' '}
-      <Styled.Submit type="submit" disabled={!isValid}>
-        {' '}
-        Submit
-      </Styled.Submit>
-    </Styled.BtnWrap>
-    <Styled.BtnWrap>
-      {' '}
-      <Styled.Button type="button" onClick={onClickGoBack}>
-        Back
-      </Styled.Button>
-    </Styled.BtnWrap>
+    <Styled.BtnContainer>
+      <Styled.BtnWrap>
+        <Styled.Submit type="submit" disabled={!isValid}>
+          Submit
+        </Styled.Submit>
+      </Styled.BtnWrap>
+      <Styled.BtnWrap>
+        <Styled.Button type="button" onClick={onClickGoBack}>
+          Back
+        </Styled.Button>
+      </Styled.BtnWrap>
+    </Styled.BtnContainer>
   </Form>
 );
 

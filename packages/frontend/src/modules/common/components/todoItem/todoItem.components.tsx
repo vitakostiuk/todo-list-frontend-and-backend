@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { useGetById } from '../../hooks/useGetById';
 import { useUpdateById } from '../../hooks/useUpdateById';
@@ -9,6 +9,10 @@ import * as Styled from './todoItem.styled';
 import * as FormStyled from '../todoForm/todoForm.styled';
 import { IStatusPrivate, IStatusCompleted } from '../../types/todos.type';
 import Input from '../input';
+
+interface IParams {
+  todoId: string;
+}
 
 interface IMyFormValues {
   title: string;
@@ -32,7 +36,9 @@ const TodoItem = () => {
 
   const history = useHistory();
 
-  const { data } = useGetById(location?.state?.id);
+  const params: IParams = useParams();
+
+  const { data } = useGetById(params.todoId);
 
   const updateByIdMutation = useUpdateById();
 
@@ -142,7 +148,7 @@ const TodoItem = () => {
                     private: values.toggle,
                     completed: values.completed
                   },
-                  id: location?.state?.id
+                  id: params.todoId
                 };
                 updateByIdMutation.mutate(updatedTodo);
                 // eslint-disable-next-line no-console

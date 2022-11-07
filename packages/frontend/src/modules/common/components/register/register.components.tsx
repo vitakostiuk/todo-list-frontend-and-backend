@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
-import { useHistory, useLocation } from 'react-router-dom';
 import * as Yup from 'yup';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useRegister } from '../../hooks/useRegister';
 import FormComponent from '../reusable/form/form.components';
 import { IUser } from '../../types/user.types';
