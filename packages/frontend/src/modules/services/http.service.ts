@@ -24,7 +24,12 @@ export class HttpSerivce {
 
   apiVersion: string;
 
-  constructor(baseUrl = 'http://localhost:4200', fetchingService = axios, apiVersion = 'api') {
+  // constructor(baseUrl = 'http://localhost:4200', fetchingService = axios, apiVersion = 'api') {
+  constructor(
+    baseUrl = 'https://todo-list-back.herokuapp.com/',
+    fetchingService = axios,
+    apiVersion = 'api'
+  ) {
     this.baseUrl = baseUrl;
     this.fetchingService = fetchingService;
     this.apiVersion = apiVersion;
