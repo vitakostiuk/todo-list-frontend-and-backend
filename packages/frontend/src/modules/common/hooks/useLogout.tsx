@@ -8,7 +8,9 @@ export const useLogout = () => {
 
   const query = useMutation(APP_KEYS.QUERY_KEYS.TODOS, () => UserService.logout(), {
     onError: (error: any) => {
-      toast.error(error.message);
+      toast.error('You are not authorized. Please log in or register.');
+      // eslint-disable-next-line no-console
+      console.log(error.message);
     },
     onSettled() {
       client.invalidateQueries(APP_KEYS.QUERY_KEYS.USER);

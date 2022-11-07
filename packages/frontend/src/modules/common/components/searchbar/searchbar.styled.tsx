@@ -17,6 +17,9 @@ export const Container = styled('div')`
 `;
 
 export const InputWrapper = styled('div')`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   /* border: 1px solid red; */
 
   @media screen and (min-width: 768px) {

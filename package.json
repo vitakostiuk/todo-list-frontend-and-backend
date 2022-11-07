@@ -1,9 +1,10 @@
 {
-  "name": "cgs-team-boilerplate",
+  "name": "todo-list-frontend-and-backend",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "homepage": "https://vitakostiuk.github.io/todo-list-frontend-and-backend/",
   "workspaces": [
     "packages/*"
   ],

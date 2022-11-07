@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
-import { useHistory, useLocation, Link } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import * as Yup from 'yup';
 import { IUser } from '../../types/user.types';
 import FormComponent from '../reusable/form/form.components';
@@ -80,9 +80,9 @@ const Profile = () => {
         )}
       </Formik>
       <Styled.BtnWrap>
-        <Link type="button" onClick={onClickLogout} to={{ pathname: '/' }}>
+        <Styled.StyleLink type="button" onClick={onClickLogout} to={{ pathname: '/' }}>
           Logout
-        </Link>
+        </Styled.StyleLink>
       </Styled.BtnWrap>
     </Styled.Container>
   );

@@ -17,10 +17,16 @@ interface ICompleted {
 export class TodoController {
   constructor(private todoService: TodoService) {}
 
+  // async getAllTodo(req: TypedRequestBody<ITodo>) {
+  //   const { id: owner } = req.user;
+  //   const params = { ...req.query, owner };
+  //   const todos = await this.todoService.findAll(params);
+  //   return todos;
+  // }
+
   async getAllTodo(req: TypedRequestBody<ITodo>) {
     const { id: owner } = req.user;
-    const params = { ...req.query, owner };
-    const todos = await this.todoService.findAll(params);
+    const todos = await this.todoService.findAll(owner);
     return todos;
   }
 
