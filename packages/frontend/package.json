@@ -2,6 +2,7 @@
   "name": "@cgs-team-boilerplate/frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://vitakostiuk.github.io/todo-list-frontend-and-backend",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -13,6 +14,7 @@
     "@types/react-slick": "^0.23.10",
     "@types/yup": "^0.32.0",
     "formik": "^2.2.9",
+    "gh-pages": "^4.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-query": "^3.39.2",
@@ -49,7 +51,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
