@@ -26,7 +26,7 @@ export class HttpSerivce {
 
   // constructor(baseUrl = 'http://localhost:4200', fetchingService = axios, apiVersion = 'api') {
   constructor(
-    baseUrl = 'https://todo-list-back.herokuapp.com/',
+    baseUrl = 'https://todo-list-back.herokuapp.com',
     fetchingService = axios,
     apiVersion = 'api'
   ) {
