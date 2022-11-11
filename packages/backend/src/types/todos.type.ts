@@ -6,6 +6,8 @@ export interface ITodo {
   private: boolean;
   completed: boolean;
   owner?: string;
+  page?: string;
+  limit?: string;
 }
 
 export interface IError {
