@@ -36,7 +36,7 @@ export const MainRouter = () => {
         <Route path={APP_KEYS.ROUTER_KEYS.PROFILE} exact>
           {isLoggedIn ? <ProfilePage /> : <Redirect to={APP_KEYS.ROUTER_KEYS.HOME} />}
         </Route>
-        <Route path={`${APP_KEYS.ROUTER_KEYS.ROOT}:todoId`} exact>
+        <Route path="/:todoId" exact>
           {isLoggedIn ? <TodoItemPageContainer /> : <Redirect to={APP_KEYS.ROUTER_KEYS.HOME} />}
         </Route>
       </Switch>

@@ -80,7 +80,7 @@ const Profile = () => {
         )}
       </Formik>
       <Styled.BtnWrap>
-        <Styled.StyleLink type="button" onClick={onClickLogout} to={{ pathname: '/' }}>
+        <Styled.StyleLink type="button" onClick={onClickLogout} to={{ pathname: '/home' }}>
           Logout
         </Styled.StyleLink>
       </Styled.BtnWrap>
