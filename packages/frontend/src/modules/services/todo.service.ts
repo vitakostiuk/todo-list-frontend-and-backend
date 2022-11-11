@@ -8,7 +8,7 @@ class TodoService extends HttpSerivce {
   }
 
   getAllTodos(params: string) {
-    const result = this.get({ url: `todos/?${params}` }, true);
+    const result = this.get({ url: `todos?${params}` }, true);
     return result;
   }
 
