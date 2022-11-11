@@ -3,8 +3,9 @@ import { toast } from 'react-toastify';
 import TodoService from '../../services/todo.service';
 import { APP_KEYS } from '../consts';
 
-export const useGetAllTodos = () => {
-  const query = useQuery(APP_KEYS.QUERY_KEYS.TODOS, () => TodoService.getAllTodos(), {
+export const useGetAllTodos = (page: string, limit: string) => {
+  const params = `page=${page}&limit=${limit}`;
+  const query = useQuery([APP_KEYS.QUERY_KEYS.TODOS, page], () => TodoService.getAllTodos(params), {
     onError: (error: any) => {
       toast.error(error.message);
     }

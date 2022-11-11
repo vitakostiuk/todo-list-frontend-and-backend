@@ -4,6 +4,11 @@ import { FONTS } from '../../../theme';
 import { SPACES } from '../../../theme/spaces.const';
 import { COLORS } from '../../../theme/colors.const';
 
+interface Props {
+  visibility?: number;
+  disabled?: boolean;
+}
+
 /* Mobile List */
 export const List = styled('ul')`
   display: block;
@@ -18,13 +23,13 @@ export const List = styled('ul')`
 
   @media screen and (min-width: 1280px) {
     display: block;
+    height: 450px;
   }
 `;
 
 export const Item = styled('li')`
   @media screen and (min-width: 769px) {
     min-height: 40px;
-    /* height: 300px; */
     padding: ${SPACES.xs};
     border: 2px solid #a3a2a2;
     border-radius: 5px;
@@ -51,6 +56,7 @@ export const Title = styled('h2')`
   color: ${COLORS.BLACK};
   margin-bottom: ${SPACES.xxs};
   margin-top: ${SPACES.m};
+  word-wrap: break-word;
 
   @media screen and (min-width: 769px) {
     margin-bottom: ${SPACES.xs};
@@ -59,6 +65,19 @@ export const Title = styled('h2')`
   @media screen and (min-width: 1280px) {
     margin: 0;
     width: 200px;
+  }
+`;
+
+export const EmptyList = styled(Title)`
+  display: flex;
+  justify-content: center;
+
+  @media screen and (min-width: 769px) {
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 100%;
+    margin-top: ${SPACES.xl};
   }
 `;
 
@@ -121,6 +140,57 @@ export const Button = styled('button')`
 
   @media screen and (min-width: 1280px) {
     width: 100px;
+  }
+`;
+
+export const PaginationWrapper = styled('div')`
+  display: none;
+
+  @media screen and (min-width: 1280px) {
+    display: flex;
+    justify-content: center;
+    margin: ${SPACES.xxl};
+  }
+`;
+
+export const Pagination = styled('div')`
+  display: none;
+
+  @media screen and (min-width: 1280px) {
+    width: 230px;
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+export const NextPage = styled('button')<Props>`
+  display: none;
+
+  @media screen and (min-width: 1280px) {
+    display: ${(props) => (props.visibility ? 'block' : 'none')};
+    border: none;
+    cursor: pointer;
+    background-color: #acacac;
+    color: ${(props) => (props.disabled ? 'gray' : `${COLORS.ACCENT}`)};
+    font-size: ${FONTS.FONT_SIZES.m};
+    font-weight: ${FONTS.WEIGHTS.bold};
+    padding: ${SPACES.xxs} ${SPACES.xs};
+    border-radius: 3px;
+    box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
+
+    &:hover {
+      background-color: ${(props) => !props.disabled && `${COLORS.ACCENT}`};
+      color: ${(props) => !props.disabled && `${COLORS.WHITE}`};
+    }
+  }
+`;
+
+export const PrevPage = styled(NextPage)`
+  display: none;
+
+  @media screen and (min-width: 1280px) {
+    display: block;
+    color: ${(props) => (props.disabled ? 'gray' : `${COLORS.ACCENT}`)};
   }
 `;
 

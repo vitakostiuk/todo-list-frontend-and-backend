@@ -7,15 +7,15 @@ class TodoService extends HttpSerivce {
     super();
   }
 
-  // getAllTodos(params: string) {
-  //   const result = this.get({ url: `todos/?${params}` }, true);
-  //   return result;
-  // }
-
-  getAllTodos() {
-    const result = this.get({ url: 'todos' });
+  getAllTodos(params: string) {
+    const result = this.get({ url: `todos/?${params}` }, true);
     return result;
   }
+
+  // getAllTodos() {
+  //   const result = this.get({ url: 'todos' });
+  //   return result;
+  // }
 
   addTodo(todo: IAddTodo) {
     return this.add(
