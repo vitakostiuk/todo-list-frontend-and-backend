@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import { useLocation } from 'react-router-dom';
+
 import { useRemoveById } from '../../hooks/useRemoveById';
 import { useGetAllTodos } from '../../hooks/useGetAllTodos';
 import { useUpdatePrivate } from '../../hooks/useUpdatePrivate';
@@ -48,7 +49,26 @@ const TodoList = ({
   filterByCompleted,
   filterByAll
 }: IProps) => {
-  const allTodosQuery = useGetAllTodos();
+  const [page, setPage] = useState(1);
+  const [todos, setTodos] = useState([]);
+
+  const allTodosQuery = useGetAllTodos(String(page), '10');
+  // console.log('todos', allTodosQuery?.data?.data);
+
+  const onClickNextPage = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const onClickPrevPage = () => {
+    setPage((prevPage) => prevPage - 1);
+  };
+
+  useEffect(() => {
+    if (allTodosQuery?.data?.data) {
+      setTodos(allTodosQuery?.data?.data);
+      // console.log(todos);
+    }
+  }, [allTodosQuery?.data?.data]);
 
   const location: ILocation = useLocation();
 
@@ -58,18 +78,18 @@ const TodoList = ({
   // console.log('updatePrivateMutation', updatePrivateMutation);
 
   const normalizedFilter = filter.toLowerCase();
-  let filteredTodos: ITodo[] = allTodosQuery?.data?.data.filter((todo: ITodo) =>
+  let filteredTodos: ITodo[] = todos.filter((todo: ITodo) =>
     todo.title.toLowerCase().includes(normalizedFilter)
   );
 
   if (filterByPrivate === true) {
-    filteredTodos = allTodosQuery?.data?.data.filter((todo: ITodo) => todo.private === true);
+    filteredTodos = todos.filter((todo: ITodo) => todo.private === true);
   } else if (filterByPublic === true) {
-    filteredTodos = allTodosQuery?.data?.data.filter((todo: ITodo) => todo.private === false);
+    filteredTodos = todos.filter((todo: ITodo) => todo.private === false);
   } else if (filterByCompleted === true) {
-    filteredTodos = allTodosQuery?.data?.data.filter((todo: ITodo) => todo.completed === true);
+    filteredTodos = todos.filter((todo: ITodo) => todo.completed === true);
   } else if (filterByAll === true) {
-    filteredTodos = allTodosQuery?.data?.data.filter((todo: ITodo) =>
+    filteredTodos = todos.filter((todo: ITodo) =>
       todo.title.toLowerCase().includes(normalizedFilter)
     );
   }
@@ -119,8 +139,25 @@ const TodoList = ({
               </Styled.BtnWrapper>
             </Styled.Item>
           ))}
+          {todos.length === 0 && <Styled.EmptyList>There are no todos yet</Styled.EmptyList>}
         </Styled.List>
       )}
+      <Styled.PaginationWrapper>
+        <Styled.Pagination>
+          <Styled.PrevPage type="button" onClick={onClickPrevPage} disabled={page === 1}>
+            Prev page
+          </Styled.PrevPage>
+
+          <Styled.NextPage
+            type="button"
+            onClick={onClickNextPage}
+            visibility={todos.length}
+            disabled={todos.length < 10}
+          >
+            Next page
+          </Styled.NextPage>
+        </Styled.Pagination>
+      </Styled.PaginationWrapper>
 
       {/* Tablet List */}
       {!allTodosQuery.isLoading && allTodosQuery?.data && (
@@ -154,6 +191,7 @@ const TodoList = ({
               </Styled.Item>
             ))}
           </Slider>
+          {todos.length === 0 && <Styled.EmptyList>There are no todos yet</Styled.EmptyList>}
         </Styled.TabletWrapper>
       )}
       {allTodosQuery.error && <div>Something went wrong</div>}
