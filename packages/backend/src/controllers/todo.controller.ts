@@ -25,8 +25,11 @@ export class TodoController {
   // }
 
   async getAllTodo(req: TypedRequestBody<ITodo>) {
+    const { page = 1, limit = 5 } = req.query;
+    const skip = (Number(page) - 1) * Number(limit);
+
     const { id: owner } = req.user;
-    const todos = await this.todoService.findAll(owner);
+    const todos = await this.todoService.findAll(owner, skip, Number(limit));
     return todos;
   }
 

@@ -36,8 +36,11 @@ export default class TodoService {
   //   return { list, count: count.length };
   // }
 
-  async findAll(owner: string | undefined) {
-    const result = await Todo.find({ owner }).populate('owner', 'email');
+  async findAll(owner: string | undefined, skip: number, limit: number) {
+    const result = await Todo.find({ owner }, '', {
+      skip,
+      limit
+    }).populate('owner', 'email');
     return result;
   }
 
