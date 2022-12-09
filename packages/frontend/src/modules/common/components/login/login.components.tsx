@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Formik } from 'formik';
 import { useHistory, useLocation } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -72,6 +73,12 @@ const Login = () => {
             email: values.email,
             password: values.password
           };
+
+          axios
+            .post('https://todo-list-back.onrender.com/api/user/login', credentials)
+            .then((res) => {
+              window.localStorage.setItem('token', JSON.stringify(res.data.token));
+            });
           loginMutation.mutate(credentials);
           setTimeout(() => history.push('/home'), 1000);
         }}

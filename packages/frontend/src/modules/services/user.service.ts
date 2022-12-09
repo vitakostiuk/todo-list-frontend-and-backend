@@ -12,14 +12,13 @@ class UserService extends HttpSerivce {
   }
 
   async register(credentials: IUser) {
-    const result = await this.add(
+    return this.add(
       {
         url: 'user/register',
         data: credentials
       },
       false
     );
-    return result;
   }
 
   async login(credentials: IUser) {
@@ -34,7 +33,7 @@ class UserService extends HttpSerivce {
   }
 
   async changePassword(credentials: IUser) {
-    const result = await this.add({
+    const result = this.add({
       url: 'user/change-password',
       data: credentials
     });
@@ -42,12 +41,12 @@ class UserService extends HttpSerivce {
   }
 
   async logout() {
-    const result = await this.get({ url: 'user/logout' }, true);
+    const result = this.get({ url: 'user/logout' }, true);
     return result;
   }
 
   async current() {
-    const result = await this.get({ url: 'user/current' }, true);
+    const result = this.get({ url: 'user/current' }, true);
     return result;
   }
 }

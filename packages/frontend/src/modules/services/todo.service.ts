@@ -18,7 +18,7 @@ class TodoService extends HttpSerivce {
   // }
 
   async addTodo(todo: IAddTodo) {
-    const result = await this.add(
+    const result = this.add(
       {
         url: 'todos',
         data: todo
@@ -29,7 +29,7 @@ class TodoService extends HttpSerivce {
   }
 
   async getById(todoId: string) {
-    const result = await this.getOne(
+    const result = this.getOne(
       {
         url: 'todos',
         id: todoId
@@ -40,7 +40,7 @@ class TodoService extends HttpSerivce {
   }
 
   async removeById(todoId: string) {
-    const result = await this.remove(
+    const result = this.remove(
       {
         url: 'todos',
         id: todoId
@@ -51,7 +51,7 @@ class TodoService extends HttpSerivce {
   }
 
   async updateById(todo: IAddTodo, todoId: string) {
-    const result = await this.put(
+    const result = this.put(
       {
         url: 'todos',
         data: todo,
@@ -63,7 +63,7 @@ class TodoService extends HttpSerivce {
   }
 
   async updatePrivate(privateStatus: IStatusPrivate, todoId: string) {
-    const result = await this.updatePrivateField(
+    const result = this.updatePrivateField(
       {
         url: 'todos',
         data: privateStatus,
@@ -75,7 +75,7 @@ class TodoService extends HttpSerivce {
   }
 
   async updateCompleted(completedStatus: IStatusCompleted, todoId: string) {
-    const result = await this.updateCompletedField(
+    const result = this.updateCompletedField(
       {
         url: 'todos',
         data: completedStatus,
