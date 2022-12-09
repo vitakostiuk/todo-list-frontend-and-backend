@@ -7,8 +7,8 @@ class TodoService extends HttpSerivce {
     super();
   }
 
-  getAllTodos(params: string) {
-    const result = this.get({ url: `todos?${params}` }, true);
+  async getAllTodos(params: string) {
+    const result = await this.get({ url: `todos?${params}` }, true);
     return result;
   }
 
@@ -17,38 +17,41 @@ class TodoService extends HttpSerivce {
   //   return result;
   // }
 
-  addTodo(todo: IAddTodo) {
-    return this.add(
+  async addTodo(todo: IAddTodo) {
+    const result = await this.add(
       {
         url: 'todos',
         data: todo
       },
       true
     );
+    return result;
   }
 
-  getById(todoId: string) {
-    return this.getOne(
+  async getById(todoId: string) {
+    const result = await this.getOne(
       {
         url: 'todos',
         id: todoId
       },
       true
     );
+    return result;
   }
 
-  removeById(todoId: string) {
-    return this.remove(
+  async removeById(todoId: string) {
+    const result = await this.remove(
       {
         url: 'todos',
         id: todoId
       },
       true
     );
+    return result;
   }
 
-  updateById(todo: IAddTodo, todoId: string) {
-    return this.put(
+  async updateById(todo: IAddTodo, todoId: string) {
+    const result = await this.put(
       {
         url: 'todos',
         data: todo,
@@ -56,10 +59,11 @@ class TodoService extends HttpSerivce {
       },
       true
     );
+    return result;
   }
 
-  updatePrivate(privateStatus: IStatusPrivate, todoId: string) {
-    return this.updatePrivateField(
+  async updatePrivate(privateStatus: IStatusPrivate, todoId: string) {
+    const result = await this.updatePrivateField(
       {
         url: 'todos',
         data: privateStatus,
@@ -67,10 +71,11 @@ class TodoService extends HttpSerivce {
       },
       true
     );
+    return result;
   }
 
-  updateCompleted(completedStatus: IStatusCompleted, todoId: string) {
-    return this.updateCompletedField(
+  async updateCompleted(completedStatus: IStatusCompleted, todoId: string) {
+    const result = await this.updateCompletedField(
       {
         url: 'todos',
         data: completedStatus,
@@ -78,6 +83,7 @@ class TodoService extends HttpSerivce {
       },
       true
     );
+    return result;
   }
 }
 
