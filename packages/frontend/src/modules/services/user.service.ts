@@ -11,40 +11,43 @@ class UserService extends HttpSerivce {
     super();
   }
 
-  register(credentials: IUser) {
-    return this.add(
+  async register(credentials: IUser) {
+    const result = await this.add(
       {
         url: 'user/register',
         data: credentials
       },
       false
     );
+    return result;
   }
 
-  login(credentials: IUser) {
-    return this.add(
+  async login(credentials: IUser) {
+    const result = await this.add(
       {
         url: 'user/login',
         data: credentials
       },
       false
     );
-  }
-
-  changePassword(credentials: IUser) {
-    return this.add({
-      url: 'user/change-password',
-      data: credentials
-    });
-  }
-
-  logout() {
-    const result = this.get({ url: 'user/logout' }, true);
     return result;
   }
 
-  current() {
-    const result = this.get({ url: 'user/current' }, true);
+  async changePassword(credentials: IUser) {
+    const result = await this.add({
+      url: 'user/change-password',
+      data: credentials
+    });
+    return result;
+  }
+
+  async logout() {
+    const result = await this.get({ url: 'user/logout' }, true);
+    return result;
+  }
+
+  async current() {
+    const result = await this.get({ url: 'user/current' }, true);
     return result;
   }
 }

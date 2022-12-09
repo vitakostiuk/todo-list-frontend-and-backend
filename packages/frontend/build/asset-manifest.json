@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.c54fe99d.css",
-    "main.js": "/static/js/main.c4723cc3.js",
-    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
-    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
-    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
-    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
-    "index.html": "/index.html",
-    "main.c54fe99d.css.map": "/static/css/main.c54fe99d.css.map",
-    "main.c4723cc3.js.map": "/static/js/main.c4723cc3.js.map"
+    "main.css": "/todo-list-frontend-and-backend/static/css/main.2898e332.css",
+    "main.js": "/todo-list-frontend-and-backend/static/js/main.5c53f514.js",
+    "static/media/slick.svg": "/todo-list-frontend-and-backend/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/todo-list-frontend-and-backend/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/todo-list-frontend-and-backend/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/todo-list-frontend-and-backend/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/todo-list-frontend-and-backend/index.html",
+    "main.2898e332.css.map": "/todo-list-frontend-and-backend/static/css/main.2898e332.css.map",
+    "main.5c53f514.js.map": "/todo-list-frontend-and-backend/static/js/main.5c53f514.js.map"
   },
   "entrypoints": [
-    "static/css/main.c54fe99d.css",
-    "static/js/main.c4723cc3.js"
+    "static/css/main.2898e332.css",
+    "static/js/main.5c53f514.js"
   ]
 }
