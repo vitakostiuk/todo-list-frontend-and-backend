@@ -27,7 +27,7 @@ export const BACKEND_KEYS = {
 };
 
 export const ROUTER_KEYS = {
-  ROOT: '/todo-list-frontend-and-backend',
+  ROOT: '/',
   HOME: '/home',
   LOGIN: '/login',
   REGISTER: '/register',
