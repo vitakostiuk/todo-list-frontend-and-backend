@@ -45,6 +45,7 @@
     "@types/slick-carousel": "^1.6.37",
     "@types/styled-components": "^5.1.26",
     "@types/yup": "^0.32.0",
+    "axios": "^1.2.1",
     "typescript": "^4.5.4",
     "yup": "^0.32.11"
   },
