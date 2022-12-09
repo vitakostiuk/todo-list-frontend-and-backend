@@ -7,7 +7,7 @@ import LoginPage from '../pages/loginPage';
 import RegisterPage from '../pages/registerPage';
 import ProfilePage from '../pages/profilePage';
 import { useGetCurrentUser } from '../common/hooks/useGetCurrentUser';
-import { APP_KEYS } from '../common/consts';
+// import { APP_KEYS } from '../common/consts';
 
 export const MainRouter = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -19,27 +19,52 @@ export const MainRouter = () => {
     <Router>
       <Switch>
         {/* PUBLIC ROUTES */}
-        <Route path={APP_KEYS.ROUTER_KEYS.HOME} exact>
-          {!isLoggedIn ? <MainPage /> : <Redirect to={APP_KEYS.ROUTER_KEYS.ROOT} />}
+        <Route path="/" exact>
+          {!isLoggedIn ? <MainPage /> : <Redirect to="/home" />}
         </Route>
-        <Route path={APP_KEYS.ROUTER_KEYS.LOGIN} exact>
-          {!isLoggedIn ? <LoginPage /> : <Redirect to={APP_KEYS.ROUTER_KEYS.ROOT} />}
+        <Route path="/login" exact>
+          {!isLoggedIn ? <LoginPage /> : <Redirect to="/home" />}
         </Route>
-        <Route path={APP_KEYS.ROUTER_KEYS.REGISTER} exact>
-          {!isLoggedIn ? <RegisterPage /> : <Redirect to={APP_KEYS.ROUTER_KEYS.ROOT} />}
+        <Route path="/register" exact>
+          {!isLoggedIn ? <RegisterPage /> : <Redirect to="/home" />}
         </Route>
 
         {/* PRIVATE ROUTES */}
-        <Route path={APP_KEYS.ROUTER_KEYS.ROOT} exact>
-          {isLoggedIn ? <HomePageContainer /> : <Redirect to={APP_KEYS.ROUTER_KEYS.HOME} />}
+        <Route path="/home" exact>
+          {isLoggedIn ? <HomePageContainer /> : <Redirect to="/" />}
         </Route>
-        <Route path={APP_KEYS.ROUTER_KEYS.PROFILE} exact>
-          {isLoggedIn ? <ProfilePage /> : <Redirect to={APP_KEYS.ROUTER_KEYS.HOME} />}
+        <Route path="/profile" exact>
+          {isLoggedIn ? <ProfilePage /> : <Redirect to="/" />}
         </Route>
         <Route path="/:todoId" exact>
-          {isLoggedIn ? <TodoItemPageContainer /> : <Redirect to={APP_KEYS.ROUTER_KEYS.HOME} />}
+          {isLoggedIn ? <TodoItemPageContainer /> : <Redirect to="/" />}
         </Route>
       </Switch>
     </Router>
+    // <Router>
+    //   <Switch>
+    //     {/* PUBLIC ROUTES */}
+    //     <Route path={APP_KEYS.ROUTER_KEYS.HOME} exact>
+    //       {!isLoggedIn ? <MainPage /> : <Redirect to={APP_KEYS.ROUTER_KEYS.ROOT} />}
+    //     </Route>
+    //     <Route path={APP_KEYS.ROUTER_KEYS.LOGIN} exact>
+    //       {!isLoggedIn ? <LoginPage /> : <Redirect to={APP_KEYS.ROUTER_KEYS.ROOT} />}
+    //     </Route>
+    //     <Route path={APP_KEYS.ROUTER_KEYS.REGISTER} exact>
+    //       {!isLoggedIn ? <RegisterPage /> : <Redirect to={APP_KEYS.ROUTER_KEYS.ROOT} />}
+    //     </Route>
+
+    //     {/* PRIVATE ROUTES */}
+    //     <Route path={APP_KEYS.ROUTER_KEYS.ROOT} exact>
+    //       {isLoggedIn ? <HomePageContainer /> : <Redirect to={APP_KEYS.ROUTER_KEYS.HOME} />}
+    //     </Route>
+    //     <Route path={APP_KEYS.ROUTER_KEYS.PROFILE} exact>
+    //       {isLoggedIn ? <ProfilePage /> : <Redirect to={APP_KEYS.ROUTER_KEYS.HOME} />}
+    //     </Route>
+    //     <Route path="/:todoId" exact>
+    //       {isLoggedIn ? <TodoItemPageContainer /> : <Redirect to={APP_KEYS.ROUTER_KEYS.HOME} />}
+    //     </Route>
+    //   </Switch>
+    // </Router>
   );
 };
