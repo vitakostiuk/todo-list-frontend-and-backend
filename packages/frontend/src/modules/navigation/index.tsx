@@ -19,25 +19,25 @@ export const MainRouter = () => {
     <Router>
       <Switch>
         {/* PUBLIC ROUTES */}
-        <Route path="" exact>
-          {!isLoggedIn ? <MainPage /> : <Redirect to="home" />}
+        <Route path="/" exact>
+          {!isLoggedIn ? <MainPage /> : <Redirect to="/home" />}
         </Route>
-        <Route path="login" exact>
-          {!isLoggedIn ? <LoginPage /> : <Redirect to="home" />}
+        <Route path="/login" exact>
+          {!isLoggedIn ? <LoginPage /> : <Redirect to="/home" />}
         </Route>
-        <Route path="register" exact>
-          {!isLoggedIn ? <RegisterPage /> : <Redirect to="home" />}
+        <Route path="/register" exact>
+          {!isLoggedIn ? <RegisterPage /> : <Redirect to="/home" />}
         </Route>
 
         {/* PRIVATE ROUTES */}
-        <Route path="home" exact>
-          {isLoggedIn ? <HomePageContainer /> : <Redirect to="" />}
+        <Route path="/home" exact>
+          {isLoggedIn ? <HomePageContainer /> : <Redirect to="/" />}
         </Route>
-        <Route path="profile" exact>
-          {isLoggedIn ? <ProfilePage /> : <Redirect to="" />}
+        <Route path="/profile" exact>
+          {isLoggedIn ? <ProfilePage /> : <Redirect to="/" />}
         </Route>
-        <Route path=":todoId" exact>
-          {isLoggedIn ? <TodoItemPageContainer /> : <Redirect to="" />}
+        <Route path="/:todoId" exact>
+          {isLoggedIn ? <TodoItemPageContainer /> : <Redirect to="/" />}
         </Route>
       </Switch>
     </Router>
