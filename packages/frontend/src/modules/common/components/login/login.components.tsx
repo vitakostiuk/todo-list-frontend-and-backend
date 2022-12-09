@@ -42,7 +42,7 @@ const Login = () => {
   const loginMutation = useLogin();
 
   const { data } = loginMutation as IResponse;
-  console.log('loginMutation.data', loginMutation);
+  // console.log('loginMutation.data', loginMutation);
 
   useEffect(() => {
     if (data?.data?.token) {
