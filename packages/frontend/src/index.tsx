@@ -5,11 +5,7 @@ import AppContainer from './modules/app';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter
-      basename="/
-todo-list-frontend-and-backend
-/"
-    >
+    <BrowserRouter>
       <AppContainer />
     </BrowserRouter>
   </React.StrictMode>,
