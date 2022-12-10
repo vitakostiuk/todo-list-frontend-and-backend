@@ -2,7 +2,6 @@
   "name": "@cgs-team-boilerplate/frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vitakostiuk.github.io/todo-list-frontend-and-backend/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -56,7 +55,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "netlify deploy -p"
   },
   "browserslist": {
     "production": [
